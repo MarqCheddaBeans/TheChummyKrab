@@ -2,12 +2,14 @@ package com.pluralsight.ui;
 
 import com.pluralsight.models.Drink;
 import com.pluralsight.models.Order;
+import com.pluralsight.models.Side;
 import com.pluralsight.models.Size;
 
 import java.util.List;
 import java.util.Scanner;
 
 import static com.pluralsight.models.Menu.getDaDrinks;
+import static com.pluralsight.models.Menu.getDaSides;
 import static com.pluralsight.models.Size.*;
 
 //Handles User interactions
@@ -135,14 +137,49 @@ public class UserInterface {
        drink.setSize(size);
        order.addItem(drink);
 
-       System.out.println(drink.getSize() + " " + drink.getName() + "Added to order!");
+       System.out.println(drink.getSize() + " " + drink.getName() + " added to order!");
    }
 
    //prompt for side specs same as drink
    public void promptSide(){
 
-       //Ask user for size
-       //Ask user for side
+       //List to init sides
+       List<Side> sides = getDaSides();
+
+       //Header
+       System.out.println("Add a side");
+
+       //Prompt use to choose side
+       System.out.println("Choose a side: ");
+
+       //Cycle through our list of sides and display to user
+       for(int i = 0; i < sides.size(); i++){
+           System.out.println((i + 1) + ") " + sides.get(i).getName());
+       }
+
+       //store users choice
+       int choice = scan.nextInt();
+
+       //subtract user choice by 1 for sides index
+       Side side = sides.get(choice - 1);
+
+       //prompt user for size
+       System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
+       int sizeChoice = scan.nextInt();
+
+       //modern switch expression to return size in Size size based on user input, semicolon at the end??
+       Size size = switch (sizeChoice){
+           case 1 -> SMALL;
+           case 2 -> MEDIUM;
+           case 3 -> LARGE;
+           default -> MEDIUM;
+       };
+
+       //sets size to users choice and add side to our order
+       side.setSize(size);
+       order.addItem(side);
+
+       System.out.println(side.getSize() + " " + side.getName() + " added to order!");
    }
 
    //Checkout customer

@@ -15,7 +15,7 @@ public class Side extends MenuItem{
     //Overload the parents methods
     @Override
     public double calculatePrice() {
-        return getPrice() * size.getBase();
+        return .75 + size.getBase();
     }
 
     //ToString to store Side info for later

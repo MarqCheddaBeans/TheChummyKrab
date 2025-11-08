@@ -38,7 +38,7 @@ public class Menu {
         sides.add(new Side("Crispity Crunchities", 3.49, MEDIUM));
         sides.add(new Side("Chum Stick", 2.99, MEDIUM));
         sides.add(new Side("Kelp Fries", 2.49, MEDIUM));
-        sides.add(new Side("Kelp Fries", 2.49, MEDIUM));
+        sides.add(new Side("Chum Fries", 2.49, MEDIUM));
         sides.add(new Side("Coral nuggets", 5, MEDIUM));
         return sides;
     }
