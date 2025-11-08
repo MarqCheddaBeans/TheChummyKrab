@@ -1,8 +1,8 @@
 package com.pluralsight.models;
 
-public enum BunType {
+public enum BunType{
 
-    KALE("Kale Bun",2),
+    KELPB("Kelp Bun",2),
     POTATO("Potato Bun",1.50),
     NONE("No Bun", 0);
 

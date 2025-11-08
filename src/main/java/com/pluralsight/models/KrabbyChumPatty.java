@@ -37,6 +37,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         addOns.remove(addOn);
     }
 
+    //Calculate price for burger taking into account addons, bun type, size and patty type
     @Override
     public double calculatePrice(){
         double total = getPrice() + size.getBase() + patty.getPrice() + bun.getPrice();

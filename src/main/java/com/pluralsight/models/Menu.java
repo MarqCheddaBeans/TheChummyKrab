@@ -10,12 +10,12 @@ public class Menu {
     public static List<AddOn> getDaAddons(){
 
         List<AddOn> addOns = new ArrayList<>();
-        addOns.add(new AddOn("Single Krusty Red Round",1,false));
-        addOns.add(new AddOn("Krunchy Kelp",1,false));
-        addOns.add(new AddOn("Half a Chumion",1,false));
+        addOns.add(new AddOn("Single Krusty Red Round",.25,false));
+        addOns.add(new AddOn("Krunchy Kelp",25,false));
+        addOns.add(new AddOn("Half a Chumion",.50,false));
         addOns.add(new AddOn("Super Secret Sauce",2.50,true));
         addOns.add(new AddOn("Jellyfish Jelly",2,true));
-        addOns.add(new AddOn("Sea Pickle Chip",1.25,false));
+        addOns.add(new AddOn("Sea Pickle Chip",.25,false));
 
         return addOns;
     }

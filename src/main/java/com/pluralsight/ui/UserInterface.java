@@ -1,15 +1,13 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.models.Drink;
-import com.pluralsight.models.Order;
-import com.pluralsight.models.Side;
-import com.pluralsight.models.Size;
+import com.pluralsight.models.*;
 
 import java.util.List;
 import java.util.Scanner;
 
-import static com.pluralsight.models.Menu.getDaDrinks;
-import static com.pluralsight.models.Menu.getDaSides;
+import static com.pluralsight.models.BunType.*;
+import static com.pluralsight.models.Menu.*;
+import static com.pluralsight.models.PattyType.KELP;
 import static com.pluralsight.models.Size.*;
 
 //Handles User interactions
@@ -91,9 +89,49 @@ public class UserInterface {
    //Ask for burger specs
    public void promptBurger(){
 
-       //Ask user for size
+       //init burgers
+       List<KrabbyChumPatty> burgers = getDaBurgers();
+
+       //Header
+       System.out.println("Build Your 'Burger'");
+
+       //Prompt for size
+       System.out.println("Please choose a size:");
+
+       for(int i = 0; i < burgers.size(); i++){
+           System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
+       }
+       int choice = scan.nextInt();
+
+       KrabbyChumPatty burger = burgers.get(choice - 1);
+
+       Size size = switch(choice){
+           case 1 -> SMALL;
+           case 2 -> MEDIUM;
+           case 3 -> LARGE;
+           default -> MEDIUM;
+       };
+
+       burger.setSize(size);
+       System.out.println("Size saved");
+
        //Ask user for bread type(Wheat White Kelp)
+
+       System.out.println("Choose Bun: 1) None 2) Kelp 3) Potato");
+       int bunInput = scan.nextInt();
+
+       BunType bun = switch(bunInput){
+           case 1 -> NONE;
+           case 2 -> KELPB;
+           case 3 -> POTATO;
+           default -> NONE;
+       };
+
+       burger.setBun(bun);
+       System.out.println("Bun saved");
+
        //Ask user for addons (Tomato, lettuce, pickle, onion,
+       System.out.println("AddOns:");
        //Ask user for sauce
        //Ask user for toasted bun
    }
