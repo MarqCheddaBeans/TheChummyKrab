@@ -3,36 +3,36 @@ package com.pluralsight.models;
 //Enumeration (Enum) used to represent group of named constants(ex day of week Mon-Sun will never change)
 public enum Size {
 
-    //Enum constants for our sizes, will multiply price based on size, hold name for our "Burgers"
+    //Enum constants for our sizes, will set price based on size, hold name for our questionableBurgers
 
-    //Small will keep base price and give the small burger a name
-    SMALL(1.0, "Chummy Patty Jr."),
+    //Small will set base price to 2 and give the small burger a name
+    SMALL(2.0, "Chummy Patty Jr."),
 
-    //Medium will multiply base price by 1.875 and give medium size burger name
-    MEDIUM(1.875,"Chummy Patty"),
+    //Medium will set base price to 3.75 and give medium size burger name
+    MEDIUM(3.75,"Chummy Patty"),
 
-    //Large will multiple base price a whopping 2.25x and give large size burger beautiful name
-    LARGE (2.25, "King Neptune's Chummy Patty");
+    //Large will set base price to 4.25 and give large size burger beautiful name
+    LARGE (4.25, "King Neptune's Chummy Patty");
 
-    //We need to set a multiplier and name for each size, name will only be for pattys
-    private final double multiplier;
+    //We need to set a base price and name for each size, name will only be for pattys
+    private final double base;
     private final String name;
 
     //Create constructor so Enum class stops yelling at me
-    Size(double multiplier, String name){
-        this.multiplier = multiplier;
+    Size(double base, String name){
+        this.base = base;
         this.name = name;
     }
 
     //Overload constructor so the drinks and side arent named per size
-    Size(double multiplier){
-        this.multiplier = multiplier;
+    Size(double base){
+        this.base = base;
         this.name = null;
     }
 
     //Gotta get them getters
-    public double getMultiplier(){
-        return multiplier;
+    public double getBase(){
+        return base;
     }
 
     public String getName(){

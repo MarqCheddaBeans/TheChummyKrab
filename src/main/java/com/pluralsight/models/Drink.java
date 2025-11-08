@@ -24,7 +24,7 @@ public class Drink extends MenuItem{
 
     @Override
     public double calculatePrice() {
-        return getPrice() * size.getMultiplier();
+        return getPrice() * size.getBase();
     }
 
     public Size getSize() {

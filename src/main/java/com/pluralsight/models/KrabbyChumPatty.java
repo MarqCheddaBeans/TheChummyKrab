@@ -11,15 +11,17 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     private Size size;
     private boolean toasted;
-    private String pattyType;
+    private PattyType patty;
+    private BunType bun;
     private List<AddOn> addOns;
-    //Constructor
 
+    //Constructor
     public KrabbyChumPatty(double price, Size size){
-        super(price);
+        super(price = size.getBase());
         this.size = size;
         this.toasted = false;
-        this.pattyType = null;
+        this.patty = PattyType.NONE;
+        this.bun = BunType.NONE;
         this.addOns = new ArrayList<>();
     }
 
@@ -37,13 +39,13 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     @Override
     public double calculatePrice(){
-        double total = getPrice() * size.getMultiplier();
+        //double total = getPrice(); // size.getBase() + patty.getPrice() + bun.getPrice();
 
-       total += addOns.stream()
-                .mapToDouble(a -> a.getPrice())
-                .sum();
+       //total += addOns.stream()
+               // .mapToDouble(a -> a.getPrice())
+        //  .sum();
 
-       return total;
+       return getPrice();
     }
 
     @Override

@@ -46,9 +46,9 @@ public class Menu {
     public static List<KrabbyChumPatty> getDaBurgers(){
 
         List<KrabbyChumPatty> burger = new ArrayList<>();
-        burger.add(new KrabbyChumPatty(3,SMALL));
-        burger.add(new KrabbyChumPatty(4.75,MEDIUM));
-        burger.add(new KrabbyChumPatty(6.50,LARGE));
+        burger.add(new KrabbyChumPatty(1,SMALL));
+        burger.add(new KrabbyChumPatty(1.5,MEDIUM));
+        burger.add(new KrabbyChumPatty(2,LARGE));
 
         return burger;
     }

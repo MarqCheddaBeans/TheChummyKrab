@@ -6,6 +6,8 @@ import com.pluralsight.util.ReceiptWriter;
 
 import java.sql.SQLOutput;
 
+import static com.pluralsight.models.Menu.getDaAddons;
+import static com.pluralsight.models.Menu.getDaBurgers;
 import static com.pluralsight.models.Size.SMALL;
 import static com.pluralsight.models.Size.MEDIUM;
 import static com.pluralsight.models.Size.LARGE;
@@ -22,8 +24,17 @@ public class TheChummyKrab {
 
         //Call display method
         //ui.display();
+        Order order = new Order();
 
-        System.out.println(Menu.getDaDrinks());
+        KrabbyChumPatty burger = getDaBurgers().get(0);
+        //AddOn addOn = getDaAddons().get(4);
+
+        //burger.addAddOn(addOn);
+
+        order.addItem(burger);
+
+        System.out.println(order);
+
 //        AddOn tomato = new AddOn("Tomato",1,false);
 //        AddOn lettuce = new AddOn("lettuce",1,false);
 //        AddOn onion = new AddOn("Onion",1,false);
