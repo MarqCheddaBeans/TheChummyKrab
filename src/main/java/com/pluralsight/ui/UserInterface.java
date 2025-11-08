@@ -1,5 +1,7 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.models.Order;
+
 import java.util.Scanner;
 
 //Handles User interactions
@@ -8,6 +10,7 @@ public class UserInterface {
     //We need the scanner
    public Scanner scan = new Scanner(System.in);
 
+   private Order order = new Order();
    //empty constructor
    public UserInterface(){};
 
@@ -76,7 +79,10 @@ public class UserInterface {
    //Ask for drink specs
    public void promptDrink(){
 
+       System.out.println("Add Drink");
        //Ask user for size
+       System.out.println("What size");
+
        //Ask user for drink type
    }
 

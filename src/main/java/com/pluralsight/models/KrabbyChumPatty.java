@@ -10,15 +10,17 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     //We need properties, check for special option, hold addons
 
     private Size size;
-    private boolean specialOption;
+    private boolean toasted;
+    private String pattyType;
     private List<AddOn> addOns;
     //Constructor
 
     public KrabbyChumPatty(double price, Size size){
         super(price);
         this.size = size;
+        this.toasted = false;
+        this.pattyType = null;
         this.addOns = new ArrayList<>();
-        this.specialOption = false;
     }
 
 
@@ -41,10 +43,6 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
                 .mapToDouble(a -> a.getPrice())
                 .sum();
 
-       if (specialOption){
-           //Extra money for special option
-           total += 2.50;
-       }
        return total;
     }
 
@@ -64,9 +62,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
                 info += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
             }
         }
-        if (specialOption) {
-            info += "    • Special Option!!/n";
-        }
+
         return info;
     }
 
@@ -78,12 +74,20 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         return size.getName();
     }
 
-    public Size getSize() {
-        return size;
+    public void setSize(Size size) {
+        this.size = size;
     }
 
-    public boolean isSpecialOption() {
-        return specialOption;
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
+    }
+
+    public void setAddOns(List<AddOn> addOns) {
+        this.addOns = addOns;
+    }
+
+    public Size getSize() {
+        return size;
     }
 
     @Override

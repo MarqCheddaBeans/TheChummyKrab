@@ -26,4 +26,12 @@ public class Drink extends MenuItem{
     public double calculatePrice() {
         return getPrice() * size.getMultiplier();
     }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
 }

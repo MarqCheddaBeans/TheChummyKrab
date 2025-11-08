@@ -28,8 +28,12 @@ public class Side extends MenuItem{
         return info;
     }
 
-    //getters
+    //getters and setters
     public Size getSize() {
         return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
     }
 }
