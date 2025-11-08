@@ -39,13 +39,13 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     @Override
     public double calculatePrice(){
-        //double total = getPrice(); // size.getBase() + patty.getPrice() + bun.getPrice();
+        double total = getPrice() + size.getBase() + patty.getPrice() + bun.getPrice();
 
-       //total += addOns.stream()
-               // .mapToDouble(a -> a.getPrice())
-        //  .sum();
+       total += addOns.stream()
+                .mapToDouble(a -> a.getPrice())
+                .sum();
 
-       return getPrice();
+       return total;
     }
 
     @Override
@@ -95,5 +95,25 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     @Override
     public List<AddOn> getAddOns() {
         return addOns;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
+
+    public PattyType getPatty() {
+        return patty;
+    }
+
+    public void setPatty(PattyType patty) {
+        this.patty = patty;
+    }
+
+    public BunType getBun() {
+        return bun;
+    }
+
+    public void setBun(BunType bun) {
+        this.bun = bun;
     }
 }

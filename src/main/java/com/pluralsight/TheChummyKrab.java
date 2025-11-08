@@ -23,17 +23,11 @@ public class TheChummyKrab {
         UserInterface ui = new UserInterface();
 
         //Call display method
-        //ui.display();
-        Order order = new Order();
+        ui.display();
 
-        KrabbyChumPatty burger = getDaBurgers().get(0);
         //AddOn addOn = getDaAddons().get(4);
 
         //burger.addAddOn(addOn);
-
-        order.addItem(burger);
-
-        System.out.println(order);
 
 //        AddOn tomato = new AddOn("Tomato",1,false);
 //        AddOn lettuce = new AddOn("lettuce",1,false);

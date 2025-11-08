@@ -1,8 +1,14 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.models.Drink;
 import com.pluralsight.models.Order;
+import com.pluralsight.models.Size;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static com.pluralsight.models.Menu.getDaDrinks;
+import static com.pluralsight.models.Size.*;
 
 //Handles User interactions
 public class UserInterface {
@@ -44,25 +50,39 @@ public class UserInterface {
 
    //Next screen, order menu
    public void orderMenu(){
-       System.out.println("=========================");
-       System.out.println("       Place Order       ");
-       System.out.println("=========================");
+       while(true) {
+           System.out.println("=========================");
+           System.out.println("       Place Order       ");
+           System.out.println("=========================");
 
-       System.out.println("1) Add Burger");
-       System.out.println("2) Add Drink");
-       System.out.println("3) Add Side");
-       System.out.println("4) Checkout");
-       System.out.println("0) Cancel Order");
+           System.out.println("1) Add Burger");
+           System.out.println("2) Add Drink");
+           System.out.println("3) Add Side");
+           System.out.println("4) Checkout");
+           System.out.println("0) Cancel Order");
 
-       int input = scan.nextInt();
+           int input = scan.nextInt();
 
-       switch (input){
-           case 1: promptBurger(); break;
-           case 2: promptDrink();break;
-           case 3: promptSide();break;
-           case 4: checkout();break;
-           case 0:
-               System.out.println("Order Canceled"); break;
+           switch (input) {
+               case 1:
+                   promptBurger();
+                   break;
+               case 2:
+                   promptDrink();
+                   break;
+               case 3:
+                   promptSide();
+                   break;
+               case 4:
+                   checkout();
+                   break;
+               case 0:
+                   System.out.println("Order Canceled");
+                   return;
+               default:
+                   System.out.println("Invalid choice");
+                   break;
+           }
        }
    }
 
@@ -79,14 +99,46 @@ public class UserInterface {
    //Ask for drink specs
    public void promptDrink(){
 
-       System.out.println("Add Drink");
-       //Ask user for size
-       System.out.println("What size");
+       //Create list to init our menu drinks
+    List<Drink> drinks = getDaDrinks();
 
-       //Ask user for drink type
+       //Header
+       System.out.println("Add Drink");
+
+       //Prompt use to choose drink
+       System.out.println("Choose a drink: ");
+
+       //Cycle through our list of drinks and display to user
+       for(int i = 0; i < drinks.size(); i++){
+           System.out.println((i + 1) + ") " + drinks.get(i).getName());
+       }
+
+       //store users choice
+       int choice = scan.nextInt();
+
+       //subtract user choice by 1 for drinks index
+       Drink drink = drinks.get(choice - 1);
+
+       //prompt user for size
+       System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
+       int sizeChoice = scan.nextInt();
+
+       //modern switch expression to return size in Size size based on user input, semicolon at the end??
+       Size size = switch (sizeChoice){
+           case 1 -> SMALL;
+           case 2 -> MEDIUM;
+           case 3 -> LARGE;
+           default -> MEDIUM;
+       };
+
+       //sets size to users choice and add drink to our order
+       drink.setSize(size);
+       order.addItem(drink);
+
+       System.out.println(drink.getSize() + " " + drink.getName() + "Added to order!");
    }
 
-   //Ask for side specs
+   //prompt for side specs same as drink
    public void promptSide(){
 
        //Ask user for size
@@ -97,7 +149,7 @@ public class UserInterface {
    public void checkout(){
 
        //display order
-
+       System.out.println(order);
        //ask user if they are sure they want to order
 
        //if yes create receipt and display confirmation
