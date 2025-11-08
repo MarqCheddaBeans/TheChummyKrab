@@ -51,12 +51,12 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     @Override
     public String toString(){
 
-        String info = "==================================================\n";
+        String info = "======================================================================================================================================================\n";
         info += getName() + " -  $" + String.format("%.2f", calculatePrice()) + "\n" ;
-        info += "==================================================\n" ;
+        info += "======================================================================================================================================================\n" ;
 
         if (addOns.isEmpty()){
-            info += "    • No toppings\n";
+            info += "    • No addons\n";
         }else {
             for( AddOn a : addOns){
                 info += "    • " + a.getName();

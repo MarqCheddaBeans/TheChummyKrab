@@ -53,10 +53,14 @@ public class TheChummyKrab {
         large.addAddOn(tomato);
         System.out.println(large);
 
+        KrabbyChumPatty otherL = new KrabbyChumPatty(4,LARGE);
+        System.out.println(otherL);
+
         Order order = new Order();
         order.addItem(small);
         order.addItem(medium);
         order.addItem(large);
+        order.addItem(otherL);
 
         System.out.println(order);
 
