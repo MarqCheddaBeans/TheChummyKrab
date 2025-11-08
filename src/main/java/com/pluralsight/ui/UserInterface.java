@@ -2,13 +2,10 @@ package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.pluralsight.models.BunType.*;
 import static com.pluralsight.models.Menu.*;
-import static com.pluralsight.models.PattyType.KELP;
 import static com.pluralsight.models.Size.*;
 
 //Handles User interactions
@@ -112,25 +109,12 @@ public class UserInterface {
            case 3 -> LARGE;
            default -> MEDIUM;
        };
-
+       System.out.println("You selected: " + size.getName());
        burger.setSize(size);
-       System.out.println("Size saved");
 
-       //Ask user for bread type(Wheat White Kelp)
-
-       System.out.println("Choose Bun: 1) None 2) Kelp 3) Potato");
-       int bunInput = scan.nextInt();
-
-       BunType bun = switch(bunInput){
-           case 1 -> NONE;
-           case 2 -> KELPB;
-           case 3 -> POTATO;
-           default -> NONE;
-       };
-       System.out.println("Bun saved");
-
-       burger.setBun(bun);
-
+       //Ask user for bread type
+       BunType userBun = askBunType();
+       burger.setBun(userBun);
 
        //ask user for patty type
        PattyType userPatty = askPattyType();
@@ -141,6 +125,34 @@ public class UserInterface {
        //Ask user for sauce
        //Ask user for toasted bun
    }
+
+    public BunType askBunType() {
+        System.out.println("Choose Your Bun");
+
+        //throw our patties into an array
+        BunType[] buns = BunType.values();
+
+        //display patties with price
+        for (int i = 0; i < buns.length; i++){
+            System.out.println((i+1) + ") " + buns[i] + " - +$" +buns[i].getPrice());
+        }
+
+        BunType userBun;
+
+        while(true){
+            System.out.println("Enter your choice");
+            int pattyInput = scan.nextInt();
+
+            if(pattyInput > 0 && pattyInput <= buns.length){
+                userBun = buns[pattyInput - 1];
+                System.out.println("You added: " + userBun.getDisplayName() + " - $" + userBun.getPrice());
+                break;
+            } else{
+                System.out.println("Invalid choice");
+            }
+        }
+        return userBun;
+    }
 
     public PattyType askPattyType() {
 
