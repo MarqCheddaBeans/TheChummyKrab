@@ -82,16 +82,8 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         return size;
     }
 
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
     public boolean isSpecialOption() {
         return specialOption;
-    }
-
-    public void setSpecialOption(boolean specialOption) {
-        this.specialOption = specialOption;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import com.pluralsight.models.AddOn;
-import com.pluralsight.models.KrabbyChumPatty;
-import com.pluralsight.models.Order;
-import com.pluralsight.models.Size;
+import com.pluralsight.models.*;
 import com.pluralsight.ui.UserInterface;
 import com.pluralsight.util.ReceiptWriter;
 
@@ -53,7 +50,7 @@ public class TheChummyKrab {
         large.addAddOn(tomato);
         System.out.println(large);
 
-        KrabbyChumPatty otherL = new KrabbyChumPatty(4,LARGE);
+        KrabbyChumPatty otherL = new KrabbyChumPatty(4, LARGE);
         System.out.println(otherL);
 
         Order order = new Order();
@@ -61,6 +58,14 @@ public class TheChummyKrab {
         order.addItem(medium);
         order.addItem(large);
         order.addItem(otherL);
+
+        Drink kelpShake = new Drink("Kelp Shake",2, SMALL);
+        Drink myDrink = new Drink("Diet DrKelp",2, MEDIUM);
+        Drink myOtherDrink = new Drink("Kelp Juice",2, LARGE);
+
+        order.addItem(kelpShake);
+        order.addItem(myDrink);
+        order.addItem(myOtherDrink);
 
         System.out.println(order);
 

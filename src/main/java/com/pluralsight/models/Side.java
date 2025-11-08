@@ -1,7 +1,7 @@
 package com.pluralsight.models;
 
 //represents any sides also menu item
-public class Side {//extends MenuItem{
+public class Side extends MenuItem{
 
     //The properties of a side
 

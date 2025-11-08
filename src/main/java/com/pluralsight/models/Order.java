@@ -40,8 +40,8 @@ public class Order {
     public String toString() {
 
         //Create String summary which we will concat order info
-        String summary = "\n==================================================\nOrder summary:\n";
-        summary += "==================================================\n" ;
+        String summary = "\n======================================================================================================================================================\nOrder summary:\n";
+        summary += "======================================================================================================================================================\n" ;
 
 
         //Check if customer has anything to order
@@ -50,7 +50,7 @@ public class Order {
         } else {
             //cycle through items list and add name and price of each item
             for (MenuItem i : items) {
-                summary += "- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
+                summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
 
                 //We want to add any addons to be displayed
                 if(i instanceof Modify m){
@@ -76,7 +76,7 @@ public class Order {
                 }
             }
             //calculate and concat the total of all addons
-            summary += "Total: $" + String.format("%.2f", calculateTotal()) + "\n";
+            summary += "======================================================================================================================================================\nTotal: $" + String.format("%.2f", calculateTotal()) + "\n======================================================================================================================================================\n";
         }
         //return the variable containing all the items in the order including price , addons and if any are premium
         return summary;
