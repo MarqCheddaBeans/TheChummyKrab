@@ -2,6 +2,7 @@ package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -126,9 +127,14 @@ public class UserInterface {
            case 3 -> POTATO;
            default -> NONE;
        };
+       System.out.println("Bun saved");
 
        burger.setBun(bun);
-       System.out.println("Bun saved");
+
+
+       //ask user for patty type
+       PattyType userPatty = askPattyType();
+       burger.setPatty(userPatty);
 
        //Ask user for addons (Tomato, lettuce, pickle, onion,
        System.out.println("AddOns:");
@@ -136,7 +142,36 @@ public class UserInterface {
        //Ask user for toasted bun
    }
 
-   //Ask for drink specs
+    public PattyType askPattyType() {
+
+        System.out.println("Choose Your Patty");
+
+        //throw our patties into an array
+        PattyType[] patties = PattyType.values();
+
+        //display patties with price
+        for (int i = 0; i < patties.length; i++){
+            System.out.println((i+1) + ") " + patties[i] + " - +$" +patties[i].getPrice());
+        }
+
+        PattyType userPatty;
+
+        while(true){
+            System.out.println("Enter your choice");
+            int pattyInput = scan.nextInt();
+
+            if(pattyInput > 0 && pattyInput <= patties.length){
+                userPatty = patties[pattyInput - 1];
+                System.out.println("You added: " + userPatty.getDisplayName() + " - $" + userPatty.getPrice());
+                break;
+            } else{
+                System.out.println("Invalid choice");
+            }
+        }
+        return userPatty;
+    }
+
+    //Ask for drink specs
    public void promptDrink(){
 
        //Create list to init our menu drinks
