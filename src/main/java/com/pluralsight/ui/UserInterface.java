@@ -37,8 +37,6 @@ public class UserInterface {
                System.out.println("Invalid input, try again");
 
        }
-
-
    }
 
    //Next screen, order menu

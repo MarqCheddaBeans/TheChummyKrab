@@ -13,6 +13,12 @@ public abstract class MenuItem {
         this.price = price;
     }
 
+    //Overload constructor for the "Burgers" since names are fixed based on size
+    public MenuItem(double price){
+        this.price = price;
+        this.name = null;
+    }
+
     //Force children to individually calculate price
     public abstract double calculatePrice();
 

@@ -22,7 +22,7 @@ public class ReceiptWriter {
      String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"));
 
      //Create File object so that we can write file in Receipt folder, naming the file with our created string fileName
-     File file = new File("Receipts", fileName);
+     File file = new File("src/main/resources/receipts", fileName);
 
      //try with resources creating a fileWriter, writing to our created file
      try(FileWriter writer = new FileWriter(file)){

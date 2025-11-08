@@ -6,7 +6,7 @@ public enum Size {
     //Enum constants for our sizes, will multiply price based on size, hold name for our "Burgers"
 
     //Small will keep base price and give the small burger a name
-    SMALL(1.0, "Jr.Chummy Patty"),
+    SMALL(1.0, "Chummy Patty Jr."),
 
     //Medium will multiply base price by 1.875 and give medium size burger name
     MEDIUM(1.875,"Chummy Patty"),

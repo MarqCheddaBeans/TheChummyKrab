@@ -40,7 +40,9 @@ public class Order {
     public String toString() {
 
         //Create String summary which we will concat order info
-        String summary = "Order summary:\n";
+        String summary = "\n==================================================\nOrder summary:\n";
+        summary += "==================================================\n" ;
+
 
         //Check if customer has anything to order
         if (items.isEmpty()) {
