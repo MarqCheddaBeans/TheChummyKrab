@@ -77,7 +77,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         if(isToasted()){
             info += "    • Toasted Bun +$50\n";
         } else{
-            info += "    • Cold Buy\n";
+            info += "    • Cold Bun\n";
         }
 
         return info;

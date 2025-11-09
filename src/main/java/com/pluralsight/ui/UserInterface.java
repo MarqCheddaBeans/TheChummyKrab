@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static com.pluralsight.models.Menu.*;
 import static com.pluralsight.models.Size.*;
+import static com.pluralsight.ui.Helper.*;
 import static com.pluralsight.ui.Prompts.*;
 
 //Handles User interactions
@@ -110,19 +111,11 @@ public class UserInterface {
                System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
            }
 
-           if(scan.hasNextInt()){
-               choice = scan.nextInt();
-               //hungry buffer
-               scan.nextLine();
-
-               if (choice >= 1 && choice <= burgers.size()) break;
-               else System.out.println("Invalid choice");
-
-           } else{
-               System.out.println("This is gibberish, please enter a number");
-               //toss bad input
-               scan.nextLine();
+           choice = getValidNumInput();
+           if(choice >= 1 && choice <= burgers.size()){
+               break;
            }
+           System.out.println("No, try again.");
        }
 
        //set burger to our selected size, subtracting 1 to account for index
@@ -162,23 +155,19 @@ public class UserInterface {
        System.out.println(burger);
        System.out.println("===============================");
 
-       int confirmChoice = -1;
+       int confirmChoice;
        while(true){
            System.out.println("Would you like to:");
            System.out.println("1) Confirm Order");
            System.out.println("2) ReDo Burger");
            System.out.println("0) Cancel Order");
 
-           if(scan.hasNextInt()){
-                confirmChoice = scan.nextInt();
-                scan.nextLine();
+               confirmChoice = getValidNumInput();
 
-                if (confirmChoice == 1 || confirmChoice == 2 || confirmChoice == 0) break;
-
-           } else{
-               System.out.println("Invalid Input. Try again");
-               scan.nextLine();
-           }
+                if (confirmChoice == 1 || confirmChoice == 2 || confirmChoice == 0){
+                    System.out.println("No. Try Again");
+                    break;
+                }
        }
        //Advanced switch to handle user input to confirm, redo , or cancel order
        switch(confirmChoice){
@@ -220,15 +209,29 @@ public class UserInterface {
            System.out.println((i + 1) + ") " + drinks.get(i).getName());
        }
 
-       //store users choice
-       int choice = scan.nextInt();
+       int choice;
+       while(true){
+           choice = getValidNumInput();
 
+           if(choice >= 1 && choice <= drinks.size()){
+               break;
+           }
+           System.out.println("No. Try Again");
+       }
        //subtract user choice by 1 for drinks index
        Drink drink = drinks.get(choice - 1);
 
        //prompt user for size
        System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
-       int sizeChoice = scan.nextInt();
+       int sizeChoice;
+
+       while(true){
+           sizeChoice = getValidNumInput();
+           if (sizeChoice >= 1 && sizeChoice <= 3){
+               break;
+           }
+           System.out.println("No. Try again");
+       }
 
        //modern switch expression to return size in Size size based on user input, semicolon at the end??
        Size size = switch (sizeChoice){
@@ -262,15 +265,31 @@ public class UserInterface {
            System.out.println((i + 1) + ") " + sides.get(i).getName());
        }
 
-       //store users choice
-       int choice = scan.nextInt();
+       int choice;
+       while(true){
+           choice = getValidNumInput();
+
+           if(choice >= 1 && choice <= sides.size()){
+               break;
+           }
+           System.out.println("No. Try Again");
+       }
 
        //subtract user choice by 1 for sides index
        Side side = sides.get(choice - 1);
 
        //prompt user for size
        System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
-       int sizeChoice = scan.nextInt();
+
+       int sizeChoice;
+
+       while(true){
+           sizeChoice = getValidNumInput();
+           if (sizeChoice >= 1 && sizeChoice <= 3){
+               break;
+           }
+           System.out.println("No. Try again");
+       }
 
        //modern switch expression to return size in Size size based on user input, semicolon at the end??
        Size size = switch (sizeChoice){
@@ -291,8 +310,24 @@ public class UserInterface {
    public void checkout(){
 
        //display order
-       System.out.println(order);
-       //ask user if they are sure they want to order
+       if(order.getItems().isEmpty()){
+           System.out.println(order);
+           homeScreen();
+           return;
+       }
+
+       while(true){
+           //Display order
+           System.out.println(order);
+
+           System.out.println("\nWould you like to: ");
+           System.out.println("1) Edit an item");
+           System.out.println("2) Remove an item");
+           System.out.println("3) Confirm Order");
+           System.out.println("0) Cancel and return to menu");
+
+           int input = getValidNumInput();
+       }
 
        //if yes create receipt and display confirmation
 
