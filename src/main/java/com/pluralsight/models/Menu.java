@@ -11,8 +11,8 @@ public class Menu {
 
         List<AddOn> addOns = new ArrayList<>();
         addOns.add(new AddOn("Single Krusty Red Round",.25,false));
-        addOns.add(new AddOn("Krunchy Kelp",25,false));
-        addOns.add(new AddOn("Half a Chumion",.50,false));
+        addOns.add(new AddOn("Krunchy Kelp",.25,false));
+        addOns.add(new AddOn("Half a Chumion",.25,false));
         addOns.add(new AddOn("Super Secret Sauce",2.50,true));
         addOns.add(new AddOn("Jellyfish Jelly",2,true));
         addOns.add(new AddOn("Sea Pickle Chip",.25,false));
@@ -46,9 +46,9 @@ public class Menu {
     public static List<KrabbyChumPatty> getDaBurgers(){
 
         List<KrabbyChumPatty> burger = new ArrayList<>();
-        burger.add(new KrabbyChumPatty(1,SMALL));
-        burger.add(new KrabbyChumPatty(1.5,MEDIUM));
-        burger.add(new KrabbyChumPatty(2,LARGE));
+        burger.add(new KrabbyChumPatty(2.00,SMALL));
+        burger.add(new KrabbyChumPatty(3.50,MEDIUM));
+        burger.add(new KrabbyChumPatty(4.25,LARGE));
 
         return burger;
     }

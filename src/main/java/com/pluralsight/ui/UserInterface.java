@@ -91,10 +91,10 @@ public class UserInterface {
        List<KrabbyChumPatty> burgers = getDaBurgers();
 
        //Header
-       System.out.println("Build Your 'Burger'");
+       System.out.println("\nBuild Your 'Burger'");
 
        //Prompt for size
-       System.out.println("Please choose a size:");
+       System.out.println("\nPlease choose a size:");
 
        for(int i = 0; i < burgers.size(); i++){
            System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
@@ -109,7 +109,7 @@ public class UserInterface {
            case 3 -> LARGE;
            default -> MEDIUM;
        };
-       System.out.println("You selected: " + size.getName());
+       System.out.println("\nYou selected: " + size.getName());
        burger.setSize(size);
 
        //Ask user for bread type
@@ -120,66 +120,149 @@ public class UserInterface {
        PattyType userPatty = askPattyType();
        burger.setPatty(userPatty);
 
-       //Ask user for addons (Tomato, lettuce, pickle, onion,
-       System.out.println("AddOns:");
+       /////////////////////////////////////////Ask user for addons (Tomato, lettuce, pickle, onion/////////////////////////////////////////////////////
+
+       askAddOns(burger);
+
        //Ask user for sauce
+       System.out.println("Add Sauce");
+
+
        //Ask user for toasted bun
    }
 
-    public BunType askBunType() {
-        System.out.println("Choose Your Bun");
+    private KrabbyChumPatty askAddOns( KrabbyChumPatty burger) {
+        System.out.println("\nSelect AddOns:");
 
-        //throw our patties into an array
-        BunType[] buns = BunType.values();
+        System.out.println("\n--- REGULAR ADDONS ---");
 
-        //display patties with price
-        for (int i = 0; i < buns.length; i++){
-            System.out.println((i+1) + ") " + buns[i] + " - +$" +buns[i].getPrice());
+        //Store regular addons in a list using beautiful stream
+        List<AddOn> regular = getDaAddons().stream()
+                .filter(r -> !r.isPremium())
+                .toList();
+
+        //cycle through our list of regular addons and print them out
+        for(int i = 0; i < regular.size(); i++){
+            AddOn a = regular.get(i);
+            System.out.println((i+1) + ") " + a.getName() + " $0.25");
         }
 
+        // same thing we did with regular addons do with premium addons
+        System.out.println("\n--- PREMIUM ADDONS ---");
+        List<AddOn> premium = getDaAddons().stream()
+                .filter(p -> p.isPremium())
+                .toList();
+
+        for(int i = 0; i<premium.size(); i++){
+            AddOn a = premium.get(i);
+            System.out.println((i + 1 + regular.size()) + ") " + a.getName() + " [+$" + a.getPrice() + "]");
+        }
+
+        System.out.println("0) Done");
+
+        //loop for user input
+        while(true){
+
+            //prompt user to pick an addon
+            System.out.println("\nPlease make a selection");
+            int inputAddOn = scan.nextInt();
+
+            //Single lined if statement
+            if(inputAddOn == 0) break;
+
+            //calc number of total addons
+            int totalAddOns = regular.size() + premium.size();
+
+            //input validaiton
+            if(inputAddOn > 0 && inputAddOn<= totalAddOns){
+                AddOn chosen;
+
+                //check if user input is within range of regular addons
+                if (inputAddOn <= regular.size()){
+                    chosen = regular.get(inputAddOn - 1);
+
+                    //if not, it is a premium topping, subtract by 1 to account for index
+                } else{
+                    chosen = premium.get(inputAddOn - regular.size() - 1);
+                }
+
+                //Add the chosen addon to burger and print confirmation
+                burger.addAddOn(chosen);
+                System.out.println("\nAdded: " + chosen.getName() + " $" + chosen.getPrice());
+            } else {
+                //invalid input
+                System.out.println("Invalid choice, try again");
+            }
+        }
+        return burger;
+    }
+
+    public BunType askBunType() {
+        System.out.println("\nChoose Your Bun");
+
+        //throw our buns into an array
+        BunType[] buns = BunType.values();
+
+        //display buns with price
+        for (int i = 0; i < buns.length; i++){
+            System.out.println((i+1) + ") " + buns[i] + " +$" +buns[i].getPrice());
+        }
+
+        //Create bun that will be used to set our burgers bun
         BunType userBun;
 
+        //Force user to give valid input
         while(true){
             System.out.println("Enter your choice");
             int pattyInput = scan.nextInt();
 
+            //check if user input is valid(prevent out of bound exception i think)
             if(pattyInput > 0 && pattyInput <= buns.length){
+                //subtract 1 from input for proper index and print confirmation
                 userBun = buns[pattyInput - 1];
                 System.out.println("You added: " + userBun.getDisplayName() + " - $" + userBun.getPrice());
+                //exit loop because user provided proper input
                 break;
             } else{
                 System.out.println("Invalid choice");
             }
         }
+        //give back userBun
         return userBun;
     }
 
     public PattyType askPattyType() {
 
-        System.out.println("Choose Your Patty");
+        System.out.println("\nChoose Your Patty");
 
         //throw our patties into an array
         PattyType[] patties = PattyType.values();
 
         //display patties with price
         for (int i = 0; i < patties.length; i++){
-            System.out.println((i+1) + ") " + patties[i] + " - +$" +patties[i].getPrice());
+            System.out.println((i+1) + ") " + patties[i] + " +$" +patties[i].getPrice());
         }
 
+        //Create patty object that will be users chosen patty
         PattyType userPatty;
 
+        //trap user in forever loop until they give me valid input
         while(true){
             System.out.println("Enter your choice");
             int pattyInput = scan.nextInt();
 
+            //prevent ArrayOOBException i think
             if(pattyInput > 0 && pattyInput <= patties.length){
+                //account for index
                 userPatty = patties[pattyInput - 1];
                 System.out.println("You added: " + userPatty.getDisplayName() + " - $" + userPatty.getPrice());
+                //exit loop
                 break;
             } else{
                 System.out.println("Invalid choice");
             }
         }
+        //give back users patty
         return userPatty;
     }
 

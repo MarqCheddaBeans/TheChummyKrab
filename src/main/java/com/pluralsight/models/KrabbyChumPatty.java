@@ -17,7 +17,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     //Constructor
     public KrabbyChumPatty(double price, Size size){
-        super(price = size.getBase());
+        super(price);
         this.size = size;
         this.toasted = false;
         this.patty = PattyType.NONE;
@@ -40,11 +40,13 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     //Calculate price for burger taking into account addons, bun type, size and patty type
     @Override
     public double calculatePrice(){
-        double total = getPrice() + size.getBase() + patty.getPrice() + bun.getPrice();
+        double total = size.getBase() + patty.getPrice() + bun.getPrice();
 
-       total += addOns.stream()
-                .mapToDouble(a -> a.getPrice())
-                .sum();
+        if( !addOns.isEmpty()){
+            total += addOns.stream()
+                    .mapToDouble(a -> a.getPrice())
+                    .sum();
+        }
 
        return total;
     }
