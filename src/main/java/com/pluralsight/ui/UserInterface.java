@@ -100,12 +100,29 @@ public class UserInterface {
        System.out.println("\nBuild Your 'Burger'");
 
        //Prompt for size then display
-       System.out.println("\nPlease choose a size:");
 
-       for(int i = 0; i < burgers.size(); i++){
-           System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
+       int choice = -1;
+       while(true){
+           System.out.println("\nPlease choose a size:");
+
+           for(int i = 0; i < burgers.size(); i++){
+               System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
+           }
+
+           if(scan.hasNextInt()){
+               choice = scan.nextInt();
+               //hungry buffer
+               scan.nextLine();
+
+               if (choice >= 1 && choice <= burgers.size()) break;
+               else System.out.println("Invalid choice");
+
+           } else{
+               System.out.println("This is gibberish, please enter a number");
+               //toss bad input
+               scan.nextLine();
+           }
        }
-       int choice = scan.nextInt();
 
        //set burger to our selected size, subtracting 1 to account for index
        KrabbyChumPatty burger = burgers.get(choice - 1);
@@ -144,14 +161,24 @@ public class UserInterface {
        System.out.println(burger);
        System.out.println("===============================");
 
-       System.out.println("Would you like to:");
-       System.out.println("1) Confirm Order");
-       System.out.println("2) ReDo Burger");
-       System.out.println("0) Cancel Order");
+       int confirmChoice = -1;
+       while(true){
+           System.out.println("Would you like to:");
+           System.out.println("1) Confirm Order");
+           System.out.println("2) ReDo Burger");
+           System.out.println("0) Cancel Order");
 
-       int confirmChoice = scan.nextInt();
-       scan.nextLine();
+           if(scan.hasNextInt()){
+                confirmChoice = scan.nextInt();
+                scan.nextLine();
 
+                if (confirmChoice == 1 || confirmChoice == 2 || confirmChoice == 0) break;
+
+           } else{
+               System.out.println("Invalid Input. Try again");
+               scan.nextLine();
+           }
+       }
        //Advanced switch to handle user input to confirm, redo , or cancel order
        switch(confirmChoice){
 
@@ -169,7 +196,7 @@ public class UserInterface {
                orderMenu();
            }
            default -> {
-               System.out.println("Invalid choice. Returning to menu.");
+               System.out.println("Error. Returning to menu.");
                homeScreen();
            }
        }
@@ -178,23 +205,39 @@ public class UserInterface {
 
    //Method to prompt user for toasted bun option
     public void askToasted(KrabbyChumPatty burger) {
-        System.out.println("\nWould you like your bun toasted? (y/n): ");
-        scan.nextLine();
-        String toastedInput = scan.nextLine().toLowerCase();
 
-        if(toastedInput.equalsIgnoreCase("y")){
-            burger.setToasted(true);
-            System.out.println("TOASTED BUN = $50 NO REFUNDS");
-        }else {
-            System.out.println("No toasted bun?? Are you sure? (y/n)");
-            String validToast = scan.nextLine();
-            if (validToast.equalsIgnoreCase("y")){
-                System.out.println("Thats crazy, enjoy your cold buns");
-            }else{
-                System.out.println("Excellent choice\nTOASTED BUN = $50 NO REFUNDS");
-                burger.setToasted(true);
-            }
-        }
+       //default toasted to false until we can confirm true
+       boolean toasted = false;
+
+       //trap user in loop until they satisfy requirements
+       while(true){
+           System.out.println("\nWould you like your bun toasted? (y/n): ");
+           String toastedInput = scan.nextLine();
+
+           if(toastedInput.equalsIgnoreCase("y")){
+               toasted = true;
+               System.out.println("TOASTED BUN = $50 NO REFUNDS");
+               break;
+           }else if(toastedInput.equalsIgnoreCase("n")){
+               System.out.println("No toasted bun?? Are you sure? (y/n)");
+               String validToast = scan.nextLine();
+
+               if (validToast.equalsIgnoreCase("y")){
+                   System.out.println("Thats crazy, enjoy your cold buns");
+                   break;
+               }else if(validToast.equalsIgnoreCase("n")){
+                   System.out.println("Excellent choice!\nTOASTED BUN = $50 NO REFUNDS");
+                   toasted = true;
+                   break;
+               }else{
+                   System.out.println("Invalid input. Try again");
+               }
+           }else{
+               System.out.println("You gotta enter 'y' or 'n'");
+           }
+       }
+       //set toasted to boolean user choice
+       burger.setToasted(toasted);
     }
 
     //method to prompt user for addons
