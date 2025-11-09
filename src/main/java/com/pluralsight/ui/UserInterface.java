@@ -120,15 +120,29 @@ public class UserInterface {
        PattyType userPatty = askPattyType();
        burger.setPatty(userPatty);
 
-       /////////////////////////////////////////Ask user for addons (Tomato, lettuce, pickle, onion/////////////////////////////////////////////////////
-
+       //Ask user for addons
        askAddOns(burger);
 
-       //Ask user for sauce
-       System.out.println("Add Sauce");
-
-
        //Ask user for toasted bun
+
+       System.out.println("\nWould you like your bun toasted? (y/n): ");
+       String toastedInput = scan.nextLine().toLowerCase();
+
+       if(toastedInput.equalsIgnoreCase("y")){
+           burger.setToasted(true);
+           System.out.println("TOASTED BUN = $50 NO REFUNDS");
+       }else {
+           System.out.println("No toasted bun?? Are you sure? (y/n)");
+           String validToast = scan.nextLine();
+           if (validToast.equalsIgnoreCase("y")){
+               System.out.println("Thats crazy, enjoy your cold buns");
+           }else{
+               System.out.println("Excellent choice\nTOASTED BUN = $50 NO REFUNDS");
+               burger.setToasted(true);
+           }
+           burger.setToasted(false);
+       }
+
    }
 
     private KrabbyChumPatty askAddOns( KrabbyChumPatty burger) {
