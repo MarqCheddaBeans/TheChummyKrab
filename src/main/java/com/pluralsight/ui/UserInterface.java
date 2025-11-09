@@ -22,27 +22,33 @@ public class UserInterface {
    public void display(){
 
        homeScreen();
+
    }
 
     //Home screen
    public void homeScreen(){
 
-       System.out.println("=========================");
-       System.out.println("       TheChummyKrab     ");
-       System.out.println("=========================");
+       while(true) {
+           System.out.println("=========================");
+           System.out.println("       TheChummyKrab     ");
+           System.out.println("=========================");
 
-       System.out.println("Welcome!");
-       System.out.println("1) New Order");
-       System.out.println("0) Exit");
+           System.out.println("Welcome!");
+           System.out.println("1) New Order");
+           System.out.println("0) Exit");
 
-       int menuChoice = scan.nextInt();
+           int menuChoice = scan.nextInt();
 
-       switch(menuChoice){
-           case 1: orderMenu(); break;
-           case 0: System.exit(0);
-           default:
-               System.out.println("Invalid input, try again");
-
+           switch (menuChoice) {
+               case 1:
+                   orderMenu();
+                   break;
+               case 0:
+                   System.out.println("Goodbye");
+                   System.exit(0);
+               default:
+                   System.out.println("Invalid input, try again");
+           }
        }
    }
 
@@ -93,7 +99,7 @@ public class UserInterface {
        //Header
        System.out.println("\nBuild Your 'Burger'");
 
-       //Prompt for size
+       //Prompt for size then display
        System.out.println("\nPlease choose a size:");
 
        for(int i = 0; i < burgers.size(); i++){
@@ -101,8 +107,10 @@ public class UserInterface {
        }
        int choice = scan.nextInt();
 
+       //set burger to our selected size, subtracting 1 to account for index
        KrabbyChumPatty burger = burgers.get(choice - 1);
 
+       //switch to assign size
        Size size = switch(choice){
            case 1 -> SMALL;
            case 2 -> MEDIUM;
@@ -123,29 +131,74 @@ public class UserInterface {
        //Ask user for addons
        askAddOns(burger);
 
-       //Ask user for toasted bun
+       //Check if user selected a bun before demanding to toast it
+       if(burger.getBun() != BunType.NONE){
+           askToasted(burger);
+       }
 
-       System.out.println("\nWould you like your bun toasted? (y/n): ");
-       String toastedInput = scan.nextLine().toLowerCase();
+       //Confirm, redo or cancel order
+       System.out.println("\n===============================");
+       System.out.println("     🧾 ORDER SUMMARY 🧾");
+       System.out.println("===============================");
 
-       if(toastedInput.equalsIgnoreCase("y")){
-           burger.setToasted(true);
-           System.out.println("TOASTED BUN = $50 NO REFUNDS");
-       }else {
-           System.out.println("No toasted bun?? Are you sure? (y/n)");
-           String validToast = scan.nextLine();
-           if (validToast.equalsIgnoreCase("y")){
-               System.out.println("Thats crazy, enjoy your cold buns");
-           }else{
-               System.out.println("Excellent choice\nTOASTED BUN = $50 NO REFUNDS");
-               burger.setToasted(true);
+       System.out.println(burger);
+       System.out.println("===============================");
+
+       System.out.println("Would you like to:");
+       System.out.println("1) Confirm Order");
+       System.out.println("2) ReDo Burger");
+       System.out.println("0) Cancel Order");
+
+       int confirmChoice = scan.nextInt();
+       scan.nextLine();
+
+       //Advanced switch to handle user input to confirm, redo , or cancel order
+       switch(confirmChoice){
+
+           case 1 -> {
+               order.addItem(burger);
+               System.out.println("Order confirmed! Back to main menu");
+               orderMenu();
            }
-           burger.setToasted(false);
+           case 2 -> {
+               System.out.println("ReDo your burger!");
+               promptBurger();
+           }
+           case 0 -> {
+               System.out.println("Order canceled, GET OUT!");
+               orderMenu();
+           }
+           default -> {
+               System.out.println("Invalid choice. Returning to menu.");
+               homeScreen();
+           }
        }
 
    }
 
-    private KrabbyChumPatty askAddOns( KrabbyChumPatty burger) {
+   //Method to prompt user for toasted bun option
+    public void askToasted(KrabbyChumPatty burger) {
+        System.out.println("\nWould you like your bun toasted? (y/n): ");
+        scan.nextLine();
+        String toastedInput = scan.nextLine().toLowerCase();
+
+        if(toastedInput.equalsIgnoreCase("y")){
+            burger.setToasted(true);
+            System.out.println("TOASTED BUN = $50 NO REFUNDS");
+        }else {
+            System.out.println("No toasted bun?? Are you sure? (y/n)");
+            String validToast = scan.nextLine();
+            if (validToast.equalsIgnoreCase("y")){
+                System.out.println("Thats crazy, enjoy your cold buns");
+            }else{
+                System.out.println("Excellent choice\nTOASTED BUN = $50 NO REFUNDS");
+                burger.setToasted(true);
+            }
+        }
+    }
+
+    //method to prompt user for addons
+    public KrabbyChumPatty askAddOns( KrabbyChumPatty burger) {
         System.out.println("\nSelect AddOns:");
 
         System.out.println("\n--- REGULAR ADDONS ---");
@@ -211,6 +264,7 @@ public class UserInterface {
         return burger;
     }
 
+    //method to prompt user for bun type
     public BunType askBunType() {
         System.out.println("\nChoose Your Bun");
 
@@ -245,6 +299,7 @@ public class UserInterface {
         return userBun;
     }
 
+    //method to prompt user for patty type
     public PattyType askPattyType() {
 
         System.out.println("\nChoose Your Patty");

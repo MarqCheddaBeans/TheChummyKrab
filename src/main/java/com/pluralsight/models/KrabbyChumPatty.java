@@ -47,6 +47,9 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
                     .mapToDouble(a -> a.getPrice())
                     .sum();
         }
+        if(isToasted()){
+            total += 50;
+        }
 
        return total;
     }
@@ -58,6 +61,9 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         info += getName() + " -  $" + String.format("%.2f", calculatePrice()) + "\n" ;
         info += "======================================================================================================================================================\n" ;
 
+        info += "\n    • " + bun.displayName + "  +$" + String.format("%.2f", bun.getPrice());
+        info += "\n    • " + patty.getDisplayName() + "  +$" + String.format("%.2f", patty.getPrice()) + "\n";;
+
         if (addOns.isEmpty()){
             info += "    • No addons\n";
         }else {
@@ -66,6 +72,12 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
                 if(a.isPremium()) info += " [Premium]";
                 info += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
             }
+        }
+
+        if(isToasted()){
+            info += "    • Toasted Bun +$50\n";
+        } else{
+            info += "    • Cold Buy\n";
         }
 
         return info;
@@ -100,10 +112,12 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         return addOns;
     }
 
+    @Override
     public boolean isToasted() {
         return toasted;
     }
 
+    @Override
     public PattyType getPatty() {
         return patty;
     }
@@ -112,6 +126,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         this.patty = patty;
     }
 
+    @Override
     public BunType getBun() {
         return bun;
     }

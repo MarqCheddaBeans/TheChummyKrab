@@ -11,4 +11,10 @@ public interface Modify {
     void removeAddOn(AddOn a);
 
     List<AddOn> getAddOns();
+
+    BunType getBun();
+
+    PattyType getPatty();
+
+    boolean isToasted();
 }

@@ -54,12 +54,17 @@ public class Order {
 
                 //We want to add any addons to be displayed
                 if(i instanceof Modify m){
+
+                    summary += "    • " + m.getBun() + "  +$" + String.format("%.2f", m.getBun().getPrice()) + "\n";
+
+                    summary += "    • " + m.getPatty() + "  +$" + String.format("%.2f", m.getPatty().getPrice()) + "\n";
+
                     //Create AddOn list to store items implementing Modify( meaning they can have addOns)
                     List<AddOn> addOns = m.getAddOns();
 
                     //Check if the item implementing Modify actually has any addons
                     if(addOns.isEmpty()){
-                        summary += " • No addons\n";
+                        summary += " \t• No addons\n";
                     }else{
                         //cycle through addons and add the name
                         for(AddOn a : addOns){
@@ -72,6 +77,11 @@ public class Order {
                             //concat the price of addon
                             summary += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
                         }
+                    }
+                    if(m.isToasted()){
+                        summary += "    • Consented Toasted Bun +$50.00\n";
+                    }else{
+                        summary += "    • Cold Bun\n";
                     }
                 }
             }
