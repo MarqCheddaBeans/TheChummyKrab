@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.pluralsight.models.Menu.getDaAddons;
+import static com.pluralsight.ui.Helper.getValidStrInput;
 
 //This class will mainly handle prompts for building our burger
 public class Prompts {
@@ -190,7 +191,7 @@ public class Prompts {
         //trap user in loop until they satisfy requirements
         while(true){
             System.out.println("\nWould you like your bun toasted? (y/n): ");
-            String toastedInput = scan.nextLine();
+            String toastedInput = getValidStrInput();
 
             if(toastedInput.equalsIgnoreCase("y")){
                 toasted = true;

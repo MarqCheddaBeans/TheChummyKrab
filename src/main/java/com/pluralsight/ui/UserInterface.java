@@ -39,7 +39,7 @@ public class UserInterface {
            System.out.println("1) New Order");
            System.out.println("0) Exit");
 
-           int menuChoice = scan.nextInt();
+           int menuChoice = getValidNumInput();
 
            switch (menuChoice) {
                case 1:
@@ -67,7 +67,7 @@ public class UserInterface {
            System.out.println("4) Checkout");
            System.out.println("0) Cancel Order");
 
-           int input = scan.nextInt();
+           int input = getValidNumInput();
 
            switch (input) {
                case 1:

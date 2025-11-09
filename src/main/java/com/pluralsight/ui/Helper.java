@@ -19,4 +19,18 @@ public class Helper {
         }
     }
 
+    public static String getValidStrInput(){
+
+        while(true){
+            if(scan.hasNextLine()){
+                String input = scan.nextLine();
+                return input;
+            }else{
+                System.out.println("No bueno");
+                //Toss invalid input
+                scan.nextLine();
+            }
+        }
+    }
+
 }
