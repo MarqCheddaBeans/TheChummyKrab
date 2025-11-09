@@ -23,7 +23,8 @@ public class TheChummyKrab {
         UserInterface ui = new UserInterface();
 
         //Call display method
-        ui.display();
+        //ui.display();
+        ui.promptBurger();
 
         //AddOn addOn = getDaAddons().get(4);
 
