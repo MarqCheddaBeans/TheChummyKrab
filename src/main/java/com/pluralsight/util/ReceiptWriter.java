@@ -32,7 +32,7 @@ public class ReceiptWriter {
 
          //Write our receipt information from getReceiptInfo class and print confirmation
         writer.write(getReceiptInfo(order));
-        System.out.println("Receipt saved!");
+        System.out.println("Success!");
 
         //Handle IOException
      }catch(IOException e){
@@ -89,9 +89,9 @@ public class ReceiptWriter {
      //Display total and optional disclaimer
      receipt += "\n----------------------------------------------------------------------------------------------------------------------------\n";
      receipt += "\t\t\t\t\tTotal: $" + String.format("%.2f", order.calculateTotal()) + "\n";
-     receipt += "\t\t\t\t\t⚠️ WARNING: Consuming The Chummy Krab's delights may result in extreme happiness, \n \t\t\t\t\tsudden urges to dance like a jellyfish,\n" +
-             "\t\t\t\t\tor an inexplicable desire to invest in chum-based stocks. 🦀💥\n" +
-             "\t\t\t\t\tIf you survive, tell your friends. If not… well, it was tasty, right? \n" +
+     receipt += "\t\t\t\t\t⚠️ WARNING: Consuming The Chummy Krab's delights may result in nausea, vomiting \n \t\t\t\t\tsudden urges to dance like a jellyfish,\n" +
+             "\t\t\t\t\tcoughing, fever, shortness of breath, lost of taste or smell, or chance to succumb instantly\n" +
+             "\t\t\t\t\tIf you survive, tell your friends. If not… well, it was tasty! \n" +
              "\t\t\t\t\tThanks for risking it all with The Chummy Krab!\n";
      receipt += "----------------------------------------------------------------------------------------------------------------------------\n";
 

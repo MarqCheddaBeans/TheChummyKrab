@@ -1,5 +1,10 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.models.MenuItem;
+import com.pluralsight.models.Order;
+
+import java.util.List;
+
 import static com.pluralsight.ui.Prompts.scan;
 
 //This class will make my life easier DRY

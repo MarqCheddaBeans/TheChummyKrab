@@ -50,10 +50,17 @@ public class Order {
         } else {
             //cycle through items list and add name and price of each item
             for (MenuItem i : items) {
-                summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
+
+                //format our drink and side
+                if(i instanceof Drink d ){
+                    summary += "\n- " + d.getSize() + d.getName() + " $" + String.format("%.2f", d.calculatePrice()) + "\n";
+                } else if(i instanceof Side s){
+                    summary += "\n- " + s.getSize() + s.getName() + " $" + String.format("%.2f", s.calculatePrice()) + "\n";
+                }
 
                 //We want to add any addons to be displayed
                 if(i instanceof Modify m){
+                    summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
 
                     summary += "    • " + m.getBun() + "  +$" + String.format("%.2f", m.getBun().getPrice()) + "\n";
 

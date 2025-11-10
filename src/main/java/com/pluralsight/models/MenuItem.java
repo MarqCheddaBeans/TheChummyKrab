@@ -6,11 +6,13 @@ public abstract class MenuItem {
     //The properties
     private String name;
     private double price;
+    private Size size;
 
     //Our beautiful constructor
     public MenuItem(String name, double price){
         this.name = name;
         this.price = price;
+        this.size = size;
     }
 
     //Overload constructor for the "Burgers" since names are fixed based on size

@@ -1,6 +1,7 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
+import com.pluralsight.util.ReceiptWriter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import static com.pluralsight.models.Menu.*;
 import static com.pluralsight.models.Size.*;
 import static com.pluralsight.ui.Helper.*;
 import static com.pluralsight.ui.Prompts.*;
+import static com.pluralsight.util.ReceiptWriter.createReceipt;
 
 //Handles User interactions
 public class UserInterface {
@@ -158,16 +160,15 @@ public class UserInterface {
        int confirmChoice;
        while(true){
            System.out.println("Would you like to:");
-           System.out.println("1) Confirm Order");
-           System.out.println("2) ReDo Burger");
-           System.out.println("0) Cancel Order");
+           System.out.println("1) Confirm Burger");
+           System.out.println("2) Redo Burger");
+           System.out.println("0) Cancel Burger");
 
                confirmChoice = getValidNumInput();
 
-                if (confirmChoice == 1 || confirmChoice == 2 || confirmChoice == 0){
-                    System.out.println("No. Try Again");
-                    break;
-                }
+               if(confirmChoice == 1 || confirmChoice == 2 || confirmChoice == 0){
+                   break;
+               }
        }
        //Advanced switch to handle user input to confirm, redo , or cancel order
        switch(confirmChoice){
@@ -327,10 +328,130 @@ public class UserInterface {
            System.out.println("0) Cancel and return to menu");
 
            int input = getValidNumInput();
+
+           switch (input){
+               case 1 -> editOrderItem();
+               case 2 -> removeOrderItem();
+               case 3 -> {
+                   createReceipt(order);
+                   return;
+               }
+               case 0 ->{
+                   System.out.println("Returning to main menu");
+                   homeScreen();
+                   return;
+               }
+               default -> System.out.println("Invalid input. try again");
+           }
+       }
+   }
+
+   public void editOrderItem(){
+       List<MenuItem> items = order.getItems();
+
+       if(items.isEmpty()){
+           System.out.println("No items to edit");
+           checkout();
+           return;
        }
 
-       //if yes create receipt and display confirmation
+       System.out.println("Which item would you like to edit?");
 
-       //if no either restart menu or go back to edit order
+       for(int i = 0; i < items.size(); i++){
+           System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).getPrice());
+       }
+       System.out.println("0) Cancel");
+
+       int input;
+       while(true){
+
+           System.out.print( "Enter choice: ");
+           input = getValidNumInput();
+
+           if(input == 0){
+               checkout();
+               return;
+           }
+
+           if (input >= 1 && input <= items.size()) {
+               break;
+           }
+           System.out.println("Invalid input. try again");
+       }
+
+       MenuItem selected = items.get(input - 1);
+       System.out.println("\nYou selected: " + selected.getName());
+
+       if(selected instanceof KrabbyChumPatty k){
+           System.out.println("Lets edit your burger...");
+           order.removeItem(selected);
+           promptBurger();
+       } else if( selected instanceof Drink d){
+           System.out.println("Lets switch out your " + d.getName());
+           order.removeItem(selected);
+           promptDrink();
+       } else if(selected instanceof Side s){
+           System.out.println(s.getName() + " isnt good anyway, lets edit");
+           order.removeItem(selected);
+           promptSide();
+       } else{
+           System.out.println("Not sure what youre looking for. Returning to checkout.");
+           checkout();
+       }
    }
+
+   public void removeOrderItem(){
+       List<MenuItem> items = order.getItems();
+
+       if(items.isEmpty()){
+           System.out.println("No items to remove");
+           checkout();
+           return;
+       }
+
+       System.out.println("Which item would you like to remove?");
+
+       for(int i = 0; i < items.size(); i++){
+           System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).calculatePrice());
+       }
+       System.out.println("0) Cancel");
+
+       int input;
+       while(true){
+
+           System.out.print( "Enter choice: ");
+           input = getValidNumInput();
+
+           if(input == 0){
+               checkout();
+               return;
+           }
+
+           if (input >= 1 && input <= items.size()) {
+               break;
+           }
+           System.out.println("Invalid input. try again");
+       }
+
+       MenuItem selected = items.get(input - 1);
+       System.out.println("\nYou selected: " + selected.getName());
+
+       if(selected instanceof KrabbyChumPatty k){
+           System.out.println("Lets remove your burger...");
+           order.removeItem(selected);
+           checkout();
+       } else if( selected instanceof Drink d){
+           System.out.println("Lets remove out your " + d.getName());
+           order.removeItem(selected);
+           checkout();
+       } else if(selected instanceof Side s){
+           System.out.println(s.getName() + " isnt good anyway, lets remove");
+           order.removeItem(selected);
+           checkout();
+       } else{
+           System.out.println("Not sure what youre looking for. Returning to checkout.");
+           checkout();
+       }
+   }
+
 }
