@@ -14,6 +14,8 @@ public enum Size {
     //Large will set base price to 4.25 and give large size burger beautiful name
     LARGE (4.25, "King Neptune's Chummy Patty");
 
+
+
     //We need to set a base price and name for each size, name will only be for pattys
     private final double base;
     private final String name;

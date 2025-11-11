@@ -11,6 +11,10 @@ public class Drink extends MenuItem{
         super(name, price);
         this.size = size;
     }
+    //overload constructor for special drinks
+    public Drink(String name){
+        super(name);
+    }
 
     @Override
     public String toString(){

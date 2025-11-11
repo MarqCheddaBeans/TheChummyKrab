@@ -17,4 +17,6 @@ public interface Modify {
     PattyType getPatty();
 
     boolean isToasted();
+
+    Size getSize();
 }

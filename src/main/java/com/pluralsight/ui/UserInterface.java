@@ -1,7 +1,6 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
-import com.pluralsight.util.ReceiptWriter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,9 +29,9 @@ public class UserInterface {
    }
 
     //Home screen
-   public void homeScreen(){
+   public void homeScreen() {
 
-       while(true) {
+       while (true) {
            System.out.println("=========================");
            System.out.println("       TheChummyKrab     ");
            System.out.println("=========================");
@@ -58,7 +57,9 @@ public class UserInterface {
 
    //Next screen, order menu
    public void orderMenu(){
+
        while(true) {
+
            System.out.println("=========================");
            System.out.println("       Place Order       ");
            System.out.println("=========================");
@@ -66,7 +67,8 @@ public class UserInterface {
            System.out.println("1) Add Burger");
            System.out.println("2) Add Drink");
            System.out.println("3) Add Side");
-           System.out.println("4) Checkout");
+           System.out.println("4) Signature Menu");
+           System.out.println("5) Checkout");
            System.out.println("0) Cancel Order");
 
            int input = getValidNumInput();
@@ -82,6 +84,8 @@ public class UserInterface {
                    promptSide();
                    break;
                case 4:
+                   sigMenu();
+               case 5:
                    checkout();
                    break;
                case 0:
@@ -94,6 +98,37 @@ public class UserInterface {
        }
    }
 
+   public void sigMenu(){
+
+       System.out.println("=========================");
+       System.out.println("       Signature Menu       ");
+       System.out.println("=========================");
+
+       System.out.println("\nWhich signature meal would you like?");
+       System.out.println("1) Pretty Patty Meal [LTO]");
+       System.out.println("2) Double Triple Bossy Deluxe, On A Raft, 4x4 Animal Style, Xtra Shingles With A Shimmy And A Squeeze, Light Axle Grease (Made It Cry), Burnt, And Swam");
+       System.out.println("3) Go back");
+
+       int input = getValidNumInput();
+
+       switch(input){
+           case 1 -> promptPrettyPatty();
+           case 2 -> promptDoubleTriple();
+           case 3 -> orderMenu();
+           default -> System.out.println("Invalid input");
+       }
+
+   }
+
+   public void promptPrettyPatty(){
+
+       System.out.println(signatureOrder().get(0).getItems());
+
+   }
+
+   public void promptDoubleTriple(){
+
+   }
    //Ask for burger specs
    public void promptBurger(){
 

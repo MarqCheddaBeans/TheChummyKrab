@@ -65,6 +65,9 @@ public class ReceiptWriter {
                  //Another list, this one contains AddOns named addons, calling getAddOns method from the Modify interface
                  List<AddOn> addOns = m.getAddOns();
 
+                 receipt += "\t\t\t\t\t    • " + m.getBun() + " $" + String.format("%.2f", m.getBun().getPrice()) + "\n";
+                 receipt += "\t\t\t\t\t    • " + m.getPatty() + " $" + String.format("%.2f", m.getPatty().getPrice()) + "\n";
+
                  //Check if item implementing Modify even has any addons
                  if (!addOns.isEmpty()) {
                      //loop through our add ons and add a beautifl bullet point and the name of the addon
@@ -82,7 +85,14 @@ public class ReceiptWriter {
                  } else {
                      receipt += "\t\t\t\t\t    • No addons\n";
                  }
+
+                 if(m.isToasted()){
+                     receipt += "    • Consented Toasted Bun +$50.00\n";
+                 }else{
+                     receipt += "    • Cold Bun\n";
+                 }
              }
+
          }
      }
 

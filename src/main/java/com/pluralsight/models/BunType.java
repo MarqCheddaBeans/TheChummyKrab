@@ -2,9 +2,10 @@ package com.pluralsight.models;
 
 public enum BunType{
 
-    KELPB("Kelp Bun",2),
+    KELPB("Kelp Bun",2.00),
     POTATO("Potato Bun",1.50),
-    NONE("No Bun", 0);
+    PRETTY("Pretty Bun", 0),
+    NONE("No Bun", 0.00);
 
     public String displayName;
     public double price;

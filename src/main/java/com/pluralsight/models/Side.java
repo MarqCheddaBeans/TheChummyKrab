@@ -12,6 +12,10 @@ public class Side extends MenuItem{
         this.size = size;
     }
 
+    public Side(String name){
+        super(name);
+    }
+
     //Overload the parents methods
     @Override
     public double calculatePrice() {

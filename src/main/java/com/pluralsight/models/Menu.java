@@ -3,6 +3,8 @@ package com.pluralsight.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pluralsight.models.BunType.PRETTY;
+import static com.pluralsight.models.PattyType.PRETTYPATTY;
 import static com.pluralsight.models.Size.*;
 
 public class Menu {
@@ -51,6 +53,27 @@ public class Menu {
         burger.add(new KrabbyChumPatty(4.25,LARGE));
 
         return burger;
+    }
+
+    public static List<Order> signatureOrder(){
+
+        List<Order> sigOrders = new ArrayList<>();
+        List<KrabbyChumPatty> sigBurger = new ArrayList<>();
+
+        KrabbyChumPatty prettyPatty = new KrabbyChumPatty(25,"Pretty Patty");
+        prettyPatty.setPatty(PRETTYPATTY);
+        prettyPatty.setBun(PRETTY);
+        Side prettyFries = new Side("Pretty Fries");
+        Drink prettyKelpShake = new Drink("Pretty Kelp Shake");
+
+        Order pP = new Order();
+        pP.addItem(prettyPatty);
+       // pP.addItem(prettyFries);
+        pP.addItem(prettyKelpShake);
+
+        sigOrders.add(pP);
+
+        return sigOrders;
     }
 
 

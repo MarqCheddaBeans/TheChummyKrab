@@ -14,6 +14,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     private PattyType patty;
     private BunType bun;
     private List<AddOn> addOns;
+    private String name;
 
     //Constructor
     public KrabbyChumPatty(double price, Size size){
@@ -23,6 +24,11 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         this.patty = PattyType.NONE;
         this.bun = BunType.NONE;
         this.addOns = new ArrayList<>();
+    }
+    //Overloaded constructor
+    public KrabbyChumPatty(double price, String name){
+        super(price);
+        this.name = name;
     }
 
 
@@ -37,10 +43,16 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         addOns.remove(addOn);
     }
 
+    @Override
+    public Size getSize(){
+        return this.size;
+    }
+
     //Calculate price for burger taking into account addons, bun type, size and patty type
     @Override
     public double calculatePrice(){
-        double total = size.getBase() + patty.getPrice() + bun.getPrice();
+
+        double total =size.getBase()+ patty.getPrice() + bun.getPrice();
 
         if( !addOns.isEmpty()){
             total += addOns.stream()
@@ -61,10 +73,11 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         info += getName() + " -  $" + String.format("%.2f", calculatePrice()) + "\n" ;
         info += "======================================================================================================================================================\n" ;
 
+        info += "\n    • " + size + "  +$" + String.format("%.2f", size.getBase());
         info += "\n    • " + bun.displayName + "  +$" + String.format("%.2f", bun.getPrice());
-        info += "\n    • " + patty.getDisplayName() + "  +$" + String.format("%.2f", patty.getPrice()) + "\n";;
+        info += "\n    • " + patty.getDisplayName() + "  +$" + String.format("%.2f", patty.getPrice()) + "\n";
 
-        if (addOns.isEmpty()){
+        if (addOns.isEmpty()|| addOns.equals(null)){
             info += "    • No addons\n";
         }else {
             for( AddOn a : addOns){
@@ -88,7 +101,8 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     //Override getName() method so that we can name based on size
     @Override
     public String getName(){
-        return size.getName();
+
+            return size.getName();
     }
 
     public void setSize(Size size) {
@@ -101,10 +115,6 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     public void setAddOns(List<AddOn> addOns) {
         this.addOns = addOns;
-    }
-
-    public Size getSize() {
-        return size;
     }
 
     @Override
@@ -133,5 +143,9 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
 
     public void setBun(BunType bun) {
         this.bun = bun;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
