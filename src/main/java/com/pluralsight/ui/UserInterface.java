@@ -90,6 +90,7 @@ public class UserInterface {
                    break;
                case 0:
                    System.out.println("Order Canceled");
+                   order.equals(null);
                    return;
                default:
                    System.out.println("Invalid choice");
@@ -122,8 +123,6 @@ public class UserInterface {
 
    public void promptPrettyPatty(){
 
-       System.out.println(signatureOrder().get(0).getItems());
-
    }
 
    public void promptDoubleTriple(){
@@ -145,7 +144,7 @@ public class UserInterface {
            System.out.println("\nPlease choose a size:");
 
            for(int i = 0; i < burgers.size(); i++){
-               System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice());
+               System.out.println((i+1) + ") " + burgers.get(i).getName() + " $" + burgers.get(i).getPrice() + " (" + burgers.get(i).getSize() + ")");
            }
 
            choice = getValidNumInput();
@@ -184,20 +183,31 @@ public class UserInterface {
            askToasted(burger);
        }
 
+       System.out.println("\nWould you like to make " + burger.getName() + " a combo?(Y/N)");
+       String comInput = getValidStrInput();
+       ComboMeal combo = null;
+        if(comInput.equalsIgnoreCase("y")){
+             combo = promptCombo(burger);
+        }
+
        //Confirm, redo or cancel order
        System.out.println("\n===============================");
        System.out.println("     🧾 ORDER SUMMARY 🧾");
        System.out.println("===============================");
 
-       System.out.println(burger);
+       if(combo != null){
+           System.out.println(combo);
+       } else{
+           System.out.println(burger);
+       }
        System.out.println("===============================");
 
        int confirmChoice;
        while(true){
            System.out.println("Would you like to:");
-           System.out.println("1) Confirm Burger");
-           System.out.println("2) Redo Burger");
-           System.out.println("0) Cancel Burger");
+           System.out.println("1) Confirm order");
+           System.out.println("2) Redo order");
+           System.out.println("0) Cancel order");
 
                confirmChoice = getValidNumInput();
 
@@ -209,7 +219,7 @@ public class UserInterface {
        switch(confirmChoice){
 
            case 1 -> {
-               order.addItem(burger);
+               order.addItem(combo);
                System.out.println("Order confirmed! Back to main menu");
                orderMenu();
            }
@@ -429,7 +439,11 @@ public class UserInterface {
            System.out.println(s.getName() + " isnt good anyway, lets edit");
            order.removeItem(selected);
            promptSide();
-       } else{
+       } else if(selected instanceof ComboMeal c){
+           System.out.println("You didnt like the combo?");
+           order.removeItem(selected);
+           promptBurger();
+       }else{
            System.out.println("Not sure what youre looking for. Returning to checkout.");
            checkout();
        }
@@ -489,4 +503,54 @@ public class UserInterface {
        }
    }
 
+   public ComboMeal promptCombo(KrabbyChumPatty burger){
+
+            List<Drink> drinks = getDaDrinks();
+            List<Side> sides = getDaSides();
+
+           ComboMeal combo = null;
+
+               System.out.println("Select a drink for your combo");
+               for(int i = 0; i < drinks.size(); i++){
+                   System.out.println((i + 1) + ") " + drinks.get(i).getName());
+               }
+
+               int choice;
+               while(true){
+                   choice = getValidNumInput();
+
+                   if(choice >= 1 && choice <= drinks.size()){
+                       break;
+                   }
+                   System.out.println("No. Try Again");
+               }
+               //subtract user choice by 1 for drinks index
+               Drink drink = drinks.get(choice - 1);
+
+               System.out.println("Select a side for your combo");
+
+               //Cycle through our list of sides and display to user
+               for(int i = 0; i < sides.size(); i++){
+                   System.out.println((i + 1) + ") " + sides.get(i).getName());
+               }
+
+               int sideInput;
+               while(true){
+                   sideInput = getValidNumInput();
+
+                   if(sideInput >= 1 && sideInput <= sides.size()){
+                       break;
+                   }
+                   System.out.println("No. Try Again");
+               }
+
+               //subtract user choice by 1 for sides index
+               Side side = sides.get(sideInput - 1);
+
+               combo = new ComboMeal(burger,drink,side);
+
+               System.out.println(burger.getName() + " combo added to order!");
+
+           return combo;
+   }
 }

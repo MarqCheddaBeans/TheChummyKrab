@@ -1,14 +1,12 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.models.AddOn;
-import com.pluralsight.models.BunType;
-import com.pluralsight.models.KrabbyChumPatty;
-import com.pluralsight.models.PattyType;
+import com.pluralsight.models.*;
 
 import java.util.List;
 import java.util.Scanner;
 
 import static com.pluralsight.models.Menu.getDaAddons;
+import static com.pluralsight.ui.Helper.getValidNumInput;
 import static com.pluralsight.ui.Helper.getValidStrInput;
 
 //This class will mainly handle prompts for building our burger
@@ -139,10 +137,7 @@ public class Prompts {
         while(true){
             System.out.println("\nPlease make a selection");
 
-            if(scan.hasNextInt()){
-                //prompt user to pick an addon
-                int inputAddOn = scan.nextInt();
-                scan.nextLine();
+            int inputAddOn = getValidNumInput();
 
                 //Single lined if statement
                 if(inputAddOn == 0) {
@@ -173,10 +168,6 @@ public class Prompts {
                     //invalid input
                     System.out.println("Invalid choice, try again");
                 }
-            } else{
-                System.out.println("WRONG");
-                scan.nextLine();
-            }
 
         }
         return burger;
@@ -218,5 +209,7 @@ public class Prompts {
         //set toasted to boolean user choice
         burger.setToasted(toasted);
     }
+
+
 
 }

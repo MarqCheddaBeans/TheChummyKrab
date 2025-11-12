@@ -46,10 +46,16 @@ public class Order {
 
         //Check if customer has anything to order
         if (items.isEmpty()) {
-            summary += "You didnt order anything?!\n";
+            summary += "Your order is empty?!\n";
         } else {
             //cycle through items list and add name and price of each item
             for (MenuItem i : items) {
+
+                if(i instanceof ComboMeal c){
+                    summary += c.comboInfo();
+                    continue;
+                }
+
                 summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
 
                 //We want to add any addons to be displayed
