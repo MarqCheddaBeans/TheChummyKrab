@@ -1,9 +1,6 @@
 package com.pluralsight.util;
 
-import com.pluralsight.models.AddOn;
-import com.pluralsight.models.MenuItem;
-import com.pluralsight.models.Modify;
-import com.pluralsight.models.Order;
+import com.pluralsight.models.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,6 +54,14 @@ public class ReceiptWriter {
      } else {
          //Tried to use stream but got confused, lets loop through the items in our list
          for (MenuItem i : items) {
+
+             if(i instanceof ComboMeal c){
+                     receipt += c.comboInfo();
+             }
+
+             if(i instanceof SignatureComboMeal s){
+                 receipt += s.toString();
+             }
              //each line adding name and price of item
              receipt += "\n\t\t\t\t\t- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
 

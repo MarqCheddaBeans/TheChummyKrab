@@ -49,10 +49,20 @@ public class Order {
             summary += "Your order is empty?!\n";
         } else {
             //cycle through items list and add name and price of each item
-            for (MenuItem i : items) {
 
-                if(i instanceof ComboMeal c){
-                    summary += c.comboInfo();
+                for(MenuItem i : items){
+                    if(i instanceof ComboMeal c){
+                        summary += "Combos: \n";
+                        summary += c.comboInfo();
+                        summary += "\n";
+                        continue;
+                    }
+                }
+                for (MenuItem i : items) {
+                if(i instanceof SignatureComboMeal s){
+                    summary += s.toString();
+                    summary += "\n";
+                    continue;
                 }
 
                 summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";

@@ -42,7 +42,7 @@ public class ComboMeal extends MenuItem{
 
     @Override
     public String toString() {
-        String summary = getName() + "\n";
+        String summary = "\n" + getName() + "\n";
         summary += " - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
@@ -95,7 +95,7 @@ public class ComboMeal extends MenuItem{
 
     //String for us to display Combo info to order
     public String comboInfo(){
-        String summary = getName() + "\n";
+        String summary = "\n" +getName() + "\n";
         summary += "   - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";

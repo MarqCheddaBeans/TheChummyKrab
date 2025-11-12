@@ -478,13 +478,14 @@ public class UserInterface {
 
        //cycle through items
        for(int i = 0; i < items.size(); i++){
+
            //signature combos cannot be edited
            if(items.get(i) instanceof SignatureComboMeal){
                System.out.println();
                continue;
            }
            //everything else will be displayed to user
-           System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).getPrice());
+           System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).calculatePrice());
        }
        System.out.println("\n0) Cancel");
 

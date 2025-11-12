@@ -46,5 +46,10 @@ public class SignatureComboMeal extends MenuItem{
         return side;
     }
 
+    @Override
+    public String getName(){
+        return burger.getName() + " Signature Combo";
+    }
+
 }
 
