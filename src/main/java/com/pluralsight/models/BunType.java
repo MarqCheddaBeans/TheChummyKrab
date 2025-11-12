@@ -4,7 +4,6 @@ public enum BunType{
 
     KELPB("Kelp Bun",2.00),
     POTATO("Potato Bun",1.50),
-    PRETTY("Pretty Bun", 0),
     NONE("No Bun", 0.00);
 
     public String displayName;

@@ -42,7 +42,7 @@ public class Prompts {
                 if(pattyInput > 0 && pattyInput <= buns.length){
                     //subtract 1 from input for proper index and print confirmation
                     userBun = buns[pattyInput - 1];
-                    System.out.println("You added: " + userBun.getDisplayName() + " - $" + userBun.getPrice());
+                    System.out.println("You added: " + userBun.getDisplayName() + " $" + userBun.getPrice());
                     //exit loop because user provided proper input
                     break;
                 } else{
@@ -107,7 +107,8 @@ public class Prompts {
     public static KrabbyChumPatty askAddOns( KrabbyChumPatty burger) {
         System.out.println("\nSelect AddOns:");
 
-        System.out.println("\n--- REGULAR ADDONS ---");
+        while(true){
+            System.out.println("\n--- REGULAR ADDONS ---");
 
         //Store regular addons in a list using beautiful stream
         List<AddOn> regular = getDaAddons().stream()
@@ -134,7 +135,6 @@ public class Prompts {
         System.out.println("0) Done");
 
         //loop for user input
-        while(true){
             System.out.println("\nPlease make a selection");
 
             int inputAddOn = getValidNumInput();

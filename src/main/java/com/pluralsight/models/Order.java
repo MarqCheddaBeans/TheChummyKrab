@@ -53,7 +53,6 @@ public class Order {
 
                 if(i instanceof ComboMeal c){
                     summary += c.comboInfo();
-                    continue;
                 }
 
                 summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";

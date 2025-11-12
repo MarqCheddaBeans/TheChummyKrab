@@ -12,6 +12,7 @@ public class TheChummyKrab {
         UserInterface ui = new UserInterface();
         //Call display method
         ui.display();
+        //ui.sigMenu();
 
     }
 }

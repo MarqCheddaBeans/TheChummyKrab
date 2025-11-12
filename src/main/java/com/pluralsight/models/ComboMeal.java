@@ -43,7 +43,7 @@ public class ComboMeal extends MenuItem{
     @Override
     public String toString() {
         String summary = getName() + "\n";
-        summary += "   - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
+        summary += " - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
 
@@ -72,8 +72,8 @@ public class ComboMeal extends MenuItem{
             summary += "    • Cold Bun\n";
         }
 
-        summary +=  "    •Drink: " + drink.getName() + " (" + drink.getSize() + ")\n";
-        summary += "    •Side: " + side.getName() + " (" + side.getSize() + ")\n";
+        summary +=  " -Drink: \n    •" + drink.getName() + " (" + burger.getSize() + ")\n";
+        summary += " -Side: \n    •" + side.getName() + " (" + burger.getSize() + ")\n";
         summary+= "===============================\n";
         summary +=  String.format("   Combo Price: $%.2f", calculatePrice());
 
@@ -125,8 +125,8 @@ public class ComboMeal extends MenuItem{
             summary += "    • Cold Bun\n";
         }
 
-        summary +=  "    •Drink: " + drink.getName() + " (" + drink.getSize() + ")\n";
-        summary += "    •Side: " + side.getName() + " (" + side.getSize() + ")\n";
+        summary +=  " -Drink: \n    •" + drink.getName() + " (" + burger.getSize() + ")\n";
+        summary += " -Side: \n    •" + side.getName() + " (" + burger.getSize() + ")\n";
 
         return summary;
     }

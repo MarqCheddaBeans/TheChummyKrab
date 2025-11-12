@@ -31,6 +31,9 @@ public class UserInterface {
     //Home screen
    public void homeScreen() {
 
+       //clear order when user returns to home screen
+       order = new Order();
+
        while (true) {
            System.out.println("=========================");
            System.out.println("       TheChummyKrab     ");
@@ -90,7 +93,7 @@ public class UserInterface {
                    break;
                case 0:
                    System.out.println("Order Canceled");
-                   order.equals(null);
+                   homeScreen();
                    return;
                default:
                    System.out.println("Invalid choice");
@@ -106,28 +109,76 @@ public class UserInterface {
        System.out.println("=========================");
 
        System.out.println("\nWhich signature meal would you like?");
-       System.out.println("1) Pretty Patty Meal [LTO]");
-       System.out.println("2) Double Triple Bossy Deluxe, On A Raft, 4x4 Animal Style, Xtra Shingles With A Shimmy And A Squeeze, Light Axle Grease (Made It Cry), Burnt, And Swam");
+
+       for(int i = 0; i<getSigMeals().size(); i++){
+           System.out.println((i+1) + ") " + getSigMeals().get(i).getName());
+       }
        System.out.println("3) Go back");
 
        int input = getValidNumInput();
 
        switch(input){
-           case 1 -> promptPrettyPatty();
-           case 2 -> promptDoubleTriple();
-           case 3 -> orderMenu();
-           default -> System.out.println("Invalid input");
+           case 1 -> {
+               SignatureComboMeal prettyPatty = promptPrettyPatty();
+               if(!prettyPatty.equals(null)){
+                   order.addItem(prettyPatty);
+               }
+               orderMenu();
+               break;
+           }
+           case 2 ->{
+               SignatureComboMeal nastyPatty = promptNastyPatty();
+               if(!nastyPatty.equals(null)){
+                   order.addItem(nastyPatty);
+               }
+               orderMenu();
+           }
+           case 3 -> {
+               orderMenu();
+           }
+           default -> {
+               System.out.println("Invalid input");
+               break;
+           }
+
        }
 
    }
 
-   public void promptPrettyPatty(){
+   //prompts pretty patty selection
+    public SignatureComboMeal promptPrettyPatty(){
 
-   }
+        System.out.println(getSigMeals().get(0));
 
-   public void promptDoubleTriple(){
+        System.out.println("1) Confirm meal");
+        System.out.println("2) Cancel meal");
 
-   }
+        int input = getValidNumInput();
+
+        if(input == 1){
+            return getSigMeals().get(0);
+        } else{
+            System.out.println("Meal Cancelled");
+            return null;
+        }
+    }
+
+    public SignatureComboMeal promptNastyPatty(){
+
+        System.out.println(getSigMeals().get(1));
+
+        System.out.println("1) Confirm meal");
+        System.out.println("2) Cancel meal");
+
+        int input = getValidNumInput();
+
+        if(input == 1){
+            return getSigMeals().get(1);
+        } else{
+            System.out.println("Meal Cancelled");
+            return null;
+        }
+    }
    //Ask for burger specs
    public void promptBurger(){
 
@@ -135,7 +186,11 @@ public class UserInterface {
        List<KrabbyChumPatty> burgers = getDaBurgers();
 
        //Header
-       System.out.println("\nBuild Your 'Burger'");
+       System.out.println("\n=========================\n");
+       System.out.println("\tBuild Your 'Burger'");
+       System.out.println("\n=========================\n");
+
+
 
        //Prompt for size then display
 
@@ -183,12 +238,23 @@ public class UserInterface {
            askToasted(burger);
        }
 
-       System.out.println("\nWould you like to make " + burger.getName() + " a combo?(Y/N)");
-       String comInput = getValidStrInput();
+       //Prompt Combo
        ComboMeal combo = null;
-        if(comInput.equalsIgnoreCase("y")){
-             combo = promptCombo(burger);
-        }
+
+       while(true){
+           System.out.println("\nWould you like to make " + burger.getName() + " a combo?(Y/N)");
+           String comInput = getValidStrInput();
+
+           if(comInput.equalsIgnoreCase("y")){
+               combo = promptCombo(burger);
+               break;
+           } else if(comInput.equalsIgnoreCase("n")){
+               break;
+           } else{
+               System.out.println("Invalid input, Y or N");
+           }
+       }
+
 
        //Confirm, redo or cancel order
        System.out.println("\n===============================");
@@ -204,7 +270,7 @@ public class UserInterface {
 
        int confirmChoice;
        while(true){
-           System.out.println("Would you like to:");
+           System.out.println("\nWould you like to:");
            System.out.println("1) Confirm order");
            System.out.println("2) Redo order");
            System.out.println("0) Cancel order");
@@ -245,10 +311,11 @@ public class UserInterface {
     List<Drink> drinks = getDaDrinks();
 
        //Header
-       System.out.println("Add Drink");
-
+       System.out.println("\n=========================\n");
+       System.out.println("\tAdd Drink");
+       System.out.println("\n=========================\n");
        //Prompt use to choose drink
-       System.out.println("Choose a drink: ");
+       System.out.println("Choose a drink: \n");
 
        //Cycle through our list of drinks and display to user
        for(int i = 0; i < drinks.size(); i++){
@@ -268,7 +335,7 @@ public class UserInterface {
        Drink drink = drinks.get(choice - 1);
 
        //prompt user for size
-       System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
+       System.out.println("\nChoose Size: 1) Small 2) Medium 3) Large");
        int sizeChoice;
 
        while(true){
@@ -276,7 +343,7 @@ public class UserInterface {
            if (sizeChoice >= 1 && sizeChoice <= 3){
                break;
            }
-           System.out.println("No. Try again");
+           System.out.println("No. Try again\n");
        }
 
        //modern switch expression to return size in Size size based on user input, semicolon at the end??
@@ -291,7 +358,7 @@ public class UserInterface {
        drink.setSize(size);
        order.addItem(drink);
 
-       System.out.println(drink.getSize() + " " + drink.getName() + " added to order!");
+       System.out.println(drink.getSize() + " " + drink.getName() + " added to order!\n");
    }
 
    //prompt for side specs same as drink
@@ -301,7 +368,9 @@ public class UserInterface {
        List<Side> sides = getDaSides();
 
        //Header
-       System.out.println("Add a side");
+       System.out.println("\n=========================\n");
+       System.out.println("\tAdd a side");
+       System.out.println("\n=========================\n");
 
        //Prompt use to choose side
        System.out.println("Choose a side: ");
@@ -325,7 +394,7 @@ public class UserInterface {
        Side side = sides.get(choice - 1);
 
        //prompt user for size
-       System.out.println("Choose Size: 1) Small 2) Medium 3) Large");
+       System.out.println("\nChoose Size: 1) Small 2) Medium 3) Large");
 
        int sizeChoice;
 
@@ -370,21 +439,26 @@ public class UserInterface {
            System.out.println("1) Edit an item");
            System.out.println("2) Remove an item");
            System.out.println("3) Confirm Order");
-           System.out.println("0) Cancel and return to menu");
+           System.out.println("0) Cancel and return to order menu");
 
            int input = getValidNumInput();
 
            switch (input){
-               case 1 -> editOrderItem();
-               case 2 -> removeOrderItem();
+               case 1 -> {
+                   editOrderItem();
+                   checkout();
+               }
+               case 2 -> {
+                   removeOrderItem();
+                   checkout();
+               }
                case 3 -> {
                    createReceipt(order);
-                   return;
+                   homeScreen();
                }
                case 0 ->{
-                   System.out.println("Returning to main menu");
-                   homeScreen();
-                   return;
+                   System.out.println("Returning to order menu");
+                   orderMenu();
                }
                default -> System.out.println("Invalid input. try again");
            }
@@ -394,18 +468,25 @@ public class UserInterface {
    public void editOrderItem(){
        List<MenuItem> items = order.getItems();
 
-       if(items.isEmpty()){
+       //check if any items were added to the order
+       if(items.isEmpty()) {
            System.out.println("No items to edit");
            checkout();
-           return;
        }
 
        System.out.println("Which item would you like to edit?");
 
+       //cycle through items
        for(int i = 0; i < items.size(); i++){
+           //signature combos cannot be edited
+           if(items.get(i) instanceof SignatureComboMeal){
+               System.out.println();
+               continue;
+           }
+           //everything else will be displayed to user
            System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).getPrice());
        }
-       System.out.println("0) Cancel");
+       System.out.println("\n0) Cancel");
 
        int input;
        while(true){
@@ -497,7 +578,11 @@ public class UserInterface {
            System.out.println(s.getName() + " isnt good anyway, lets remove");
            order.removeItem(selected);
            checkout();
-       } else{
+       } else if(selected instanceof SignatureComboMeal s){
+           System.out.println("No way!" + s.getName());
+           order.removeItem(selected);
+           checkout();
+       }else{
            System.out.println("Not sure what youre looking for. Returning to checkout.");
            checkout();
        }

@@ -5,7 +5,6 @@ public enum PattyType {
     KRABBY("Krabby Patty", 3),
     KELP("Kelp Patty", 4),
     CHUMMY_KRAB("Original Chummy Krab Patty", 2),
-    PRETTYPATTY("Pretty Patty", 0),
     NONE("No Patty", 0);
 
     private String displayName;

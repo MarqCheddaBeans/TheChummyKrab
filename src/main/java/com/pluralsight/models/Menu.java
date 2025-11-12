@@ -3,8 +3,9 @@ package com.pluralsight.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pluralsight.models.BunType.PRETTY;
-import static com.pluralsight.models.PattyType.PRETTYPATTY;
+import static com.pluralsight.models.SignatureBurger.SignatureAddOn.*;
+import static com.pluralsight.models.SignatureBurger.SignatureBun.*;
+import static com.pluralsight.models.SignatureBurger.SignaturePatty.*;
 import static com.pluralsight.models.Size.*;
 
 public class Menu {
@@ -28,8 +29,11 @@ public class Menu {
 
         drinks.add(new Drink("Diet DrKelp", 2.00, MEDIUM));
         drinks.add(new Drink("Kelp Juice", 3.00, MEDIUM));
+        drinks.add(new Drink("Juggernog", 5.00, MEDIUM));
         drinks.add(new Drink("Kelp Shake", 4.00, MEDIUM));
         drinks.add(new Drink("Sea Water",1.00, MEDIUM));
+        drinks.add(new Drink("Speed Cola", 5.00, MEDIUM));
+
 
         return drinks;
     }
@@ -55,26 +59,38 @@ public class Menu {
         return burger;
     }
 
-    public static List<Order> signatureOrder(){
+    public static List<SignatureComboMeal> getSigMeals(){
 
-        List<Order> sigOrders = new ArrayList<>();
-        List<KrabbyChumPatty> sigBurger = new ArrayList<>();
+        List<SignatureComboMeal> meals = new ArrayList<>();
 
-        KrabbyChumPatty prettyPatty = new KrabbyChumPatty(25,"Pretty Patty");
-        prettyPatty.setPatty(PRETTYPATTY);
-        prettyPatty.setBun(PRETTY);
-        Side prettyFries = new Side("Pretty Fries");
-        Drink prettyKelpShake = new Drink("Pretty Kelp Shake");
+        //Signature Pretty Patty creation
+        SignatureBurger prettyPatty = new SignatureBurger("The Pretty Patty",PRETTYB, PRETTYP);
+        prettyPatty.addAddOn(PKELP);
+        prettyPatty.addAddOn(PONION);
+        prettyPatty.addAddOn(PPICKLE);
+        prettyPatty.addAddOn(PTOMATO);
+        prettyPatty.addAddOn(PCHEESE);
+        SignatureDrink prettyDrink = new SignatureDrink("Pretty Kelp Shake");
+        SignatureSide prettySide = new SignatureSide("Pretty Fries");
 
-        Order pP = new Order();
-        pP.addItem(prettyPatty);
-       // pP.addItem(prettyFries);
-        pP.addItem(prettyKelpShake);
+        //Signature NastyPatty creation
+        SignatureBurger nastyPatty = new SignatureBurger("The Nasty Patty",NASTYB, NASTYP);
+        nastyPatty.addAddOn(VOLCSAUCE);
+        nastyPatty.addAddOn(OLDKETCH);
+        nastyPatty.addAddOn(TOECLIP);
+        nastyPatty.addAddOn(SOCK);
+        nastyPatty.addAddOn(RADISH);
+        SignatureDrink nastyDrink = new SignatureDrink("Fresh bottle Of Quick Revive");
+        SignatureSide nastySide = new SignatureSide("ChumStick from like 3 years ago");
 
-        sigOrders.add(pP);
+        SignatureComboMeal pretty = new SignatureComboMeal("Pretty Patty Combo", 30.00 ,prettyPatty,prettyDrink,prettySide);
+        SignatureComboMeal nasty = new SignatureComboMeal("Nasty Patty Combo", 26.50, nastyPatty, nastyDrink,nastySide);
 
-        return sigOrders;
+        meals.add(pretty);
+        meals.add(nasty);
+
+        return meals;
+
     }
-
 
 }
