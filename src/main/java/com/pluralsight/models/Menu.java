@@ -16,9 +16,13 @@ public class Menu {
         addOns.add(new AddOn("Single Krusty Red Round",.25,false));
         addOns.add(new AddOn("Krunchy Kelp",.25,false));
         addOns.add(new AddOn("Half a Chumion",.25,false));
-        addOns.add(new AddOn("Super Secret Sauce",2.50,true));
-        addOns.add(new AddOn("Jellyfish Jelly",2.00,true));
+        addOns.add(new AddOn("Peppers",.25,false));
+        addOns.add(new AddOn("Super Secret Sauce",1.50,true));
+        addOns.add(new AddOn("Jellyfish Jelly",1.00,true));
         addOns.add(new AddOn("Sea Pickle Chip",.25,false));
+        addOns.add(new AddOn("Cheese",1.00,true));
+        addOns.add(new AddOn("Extra Patty",2.00,true));
+
 
         return addOns;
     }

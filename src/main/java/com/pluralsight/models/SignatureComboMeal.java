@@ -20,6 +20,7 @@ public class SignatureComboMeal extends MenuItem{
         return this.price;
     }
 
+    //Used to display info to user when choosing meal
     @Override
     public String toString() {
         String info = "\n========================================\n";
@@ -30,6 +31,17 @@ public class SignatureComboMeal extends MenuItem{
         info += side;
         info += "------------------------------\n";
         info += "Combo Total: $" + String.format("%.2f", calculatePrice()) + "\n";
+        return info;
+    }
+
+    //used to display info to user when put on order
+    public String sigComboInfo(){
+        String info = "========================================\n";
+        info += "[Signature]" + getName() + " $" +calculatePrice() + "\n";
+        info += "========================================\n";
+        info += burger;
+        info += drink;
+        info += side;
         return info;
     }
 

@@ -40,10 +40,11 @@ public class ComboMeal extends MenuItem{
         return burger.getName() + " Combo";
     }
 
+    //Used to display info to user when choosing meal
     @Override
     public String toString() {
         String summary = "\n" + getName() + "\n";
-        summary += " - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
+        summary += "-Burger: \n" + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
 
@@ -72,8 +73,8 @@ public class ComboMeal extends MenuItem{
             summary += "    • Cold Bun\n";
         }
 
-        summary +=  " -Drink: \n    •" + drink.getName() + " (" + burger.getSize() + ")\n";
-        summary += " -Side: \n    •" + side.getName() + " (" + burger.getSize() + ")\n";
+        summary +=  "-Drink: \n    •" + drink.getName() + " (" + burger.getSize() + ")\n";
+        summary += "-Side: \n    •" + side.getName() + " (" + burger.getSize() + ")\n";
         summary+= "===============================\n";
         summary +=  String.format("   Combo Price: $%.2f", calculatePrice());
 
@@ -95,8 +96,8 @@ public class ComboMeal extends MenuItem{
 
     //String for us to display Combo info to order
     public String comboInfo(){
-        String summary = "\n" +getName() + "\n";
-        summary += "   - Burger: " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
+        String summary = getName() + "\n";
+        summary += "-Burger: " + "\n" + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
 

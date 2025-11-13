@@ -48,64 +48,77 @@ public class Order {
         if (items.isEmpty()) {
             summary += "Your order is empty?!\n";
         } else {
-            //cycle through items list and add name and price of each item
+            //Separate list by types
+            List<ComboMeal> combos = new ArrayList<>();
+            List<SignatureComboMeal> sigCombos = new ArrayList<>();
+            List<KrabbyChumPatty> burgers = new ArrayList<>();
+            List<Drink> drinks = new ArrayList<>();
+            List<Side> sides = new ArrayList<>();
 
-                for(MenuItem i : items){
-                    if(i instanceof ComboMeal c){
-                        summary += "Combos: \n";
-                        summary += c.comboInfo();
-                        summary += "\n";
-                        continue;
-                    }
-                }
-                for (MenuItem i : items) {
-                if(i instanceof SignatureComboMeal s){
-                    summary += s.toString();
-                    summary += "\n";
-                    continue;
-                }
-
-                summary += "\n- " + i.getName() + " $" + String.format("%.2f", i.calculatePrice()) + "\n";
-
-                //We want to add any addons to be displayed
-                if(i instanceof Modify m){
-                    summary += "    • " + m.getSize() + "  +$" + String.format("%.2f", m.getSize().getBase()) + "\n";
-
-                    summary += "    • " + m.getBun() + "  +$" + String.format("%.2f", m.getBun().getPrice()) + "\n";
-
-                    summary += "    • " + m.getPatty() + "  +$" + String.format("%.2f", m.getPatty().getPrice()) + "\n";
-
-                    //Create AddOn list to store items implementing Modify( meaning they can have addOns)
-                    List<AddOn> addOns = m.getAddOns();
-
-                    //Check if the item implementing Modify actually has any addons
-                    if(addOns.isEmpty()){
-                        summary += " \t• No addons\n";
-                    }else{
-                        //cycle through addons and add the name
-                        for(AddOn a : addOns){
-                            summary += "    • " + a.getName();
-
-                            //if add on is premium, add premium tag
-                            if( a.isPremium()){
-                                summary += " [Premium]";
-                            }
-                            //concat the price of addon
-                            summary += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
-                        }
-                    }
-                    if(m.isToasted()){
-                        summary += "    • Consented Toasted Bun +$50.00\n";
-                    }else{
-                        summary += "    • Cold Bun\n";
-                    }
+            //cycle through items and sort them into created lists
+            for(MenuItem i : items) {
+                if (i instanceof ComboMeal c) {
+                    combos.add(c);
+                } else if (i instanceof SignatureComboMeal s) {
+                    sigCombos.add(s);
+                } else if (i instanceof KrabbyChumPatty k) {
+                    burgers.add(k);
+                } else if (i instanceof Drink d) {
+                    drinks.add(d);
+                } else if (i instanceof Side s) {
+                    sides.add(s);
                 }
             }
+
+                //check if order has that item before printing
+                if(!sigCombos.isEmpty()){
+                    summary += "\n Signature Combos: \n";
+                    summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+                    for (SignatureComboMeal s : sigCombos) {
+                        summary += s.sigComboInfo() + "\n";
+                    }
+                }
+
+                if(!combos.isEmpty()){
+                    summary += "\n Combos: \n";
+                    summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+                    for (ComboMeal c : combos) {
+                        summary += c.comboInfo() + "\n";
+                    }
+                }
+
+                if(!burgers.isEmpty()){
+                    summary += "\n Burgers: \n";
+                    summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+                    for (KrabbyChumPatty b : burgers) {
+                        summary += "- " + b.getName() + " $" + String.format("%.2f", b.calculatePrice()) + "\n";
+                        summary += burgers;
+                    }
+                }
+
+                if(!drinks.isEmpty()){
+                    summary += "\n Drinks: \n";
+                    summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+                    for (Drink d : drinks) {
+                        summary += "- " + d.getSize() + " " + d.getName() + " $" + String.format("%.2f", d.calculatePrice()) + "\n";
+                    }
+                }
+
+                if(!sides.isEmpty()){
+                    summary += "\n Sides: \n";
+                    summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+                    for (Side s : sides) {
+                        summary += "- " + s.getSize() + " " + s.getName() + " $" + String.format("%.2f", s.calculatePrice()) + "\n";
+                    }
+                }
+
+            }
+
             //calculate and concat the total of all addons
             summary += "======================================================================================================================================================\nTotal: $" + String.format("%.2f", calculateTotal()) + "\n======================================================================================================================================================\n";
-        }
         //return the variable containing all the items in the order including price , addons and if any are premium
+
         return summary;
-    }
+        }
 
     }

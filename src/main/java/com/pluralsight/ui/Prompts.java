@@ -145,7 +145,7 @@ public class Prompts {
                     break;
                 }
 
-                //calc number of total addons
+                //calc number of total addons to get size
                 int totalAddOns = regular.size() + premium.size();
 
                 //input validaiton
@@ -168,7 +168,6 @@ public class Prompts {
                     //invalid input
                     System.out.println("Invalid choice, try again");
                 }
-
         }
         return burger;
     }

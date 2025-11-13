@@ -28,7 +28,7 @@ public class ReceiptWriter {
      try(FileWriter writer = new FileWriter(file)){
 
          //Write our receipt information from getReceiptInfo class and print confirmation
-        writer.write(getReceiptInfo(order));
+        writer.write(order.toString());
         System.out.println("Success!");
 
         //Handle IOException

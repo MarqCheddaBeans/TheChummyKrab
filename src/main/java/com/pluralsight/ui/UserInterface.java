@@ -481,7 +481,6 @@ public class UserInterface {
 
            //signature combos cannot be edited
            if(items.get(i) instanceof SignatureComboMeal){
-               System.out.println();
                continue;
            }
            //everything else will be displayed to user
