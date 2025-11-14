@@ -1,24 +1,30 @@
 package com.pluralsight.models;
 
-import java.awt.*;
+import com.pluralsight.models.combos.ComboMeal;
+import com.pluralsight.models.combos.SignatureComboMeal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //This will manage list of menu items and calc total
 public class Order {
 
+    //Create list of menu items
     private List<MenuItem> items;
 
+    //constructor
     public Order(){
         this.items = new ArrayList<>();
     }
 
+    //method to add an item to our menu item list that will be the users order
     public void addItem(MenuItem item){
         if( item != null){
             items.add(item);
         }
     }
 
+    //method to remove items from order
     public void removeItem(MenuItem item){
         items.remove(item);
     }
@@ -35,7 +41,7 @@ public class Order {
         return items;
     }
 
-    //Override toString from parent class object and formal to look pretty
+    //Override toString from parent class object and format to look pretty
     @Override
     public String toString() {
 
@@ -91,8 +97,8 @@ public class Order {
                     summary += "\n Burgers: \n";
                     summary += "------------------------------------------------------------------------------------------------------------------------------------------------------\n";
                     for (KrabbyChumPatty b : burgers) {
-                        summary += "- " + b.getName() + " $" + String.format("%.2f", b.calculatePrice()) + "\n";
-                        summary += burgers;
+                        //summary += "- " + b.getName() + " $" + String.format("%.2f", b.calculatePrice()) + "\n";
+                        summary += b.burgerInfo();
                     }
                 }
 

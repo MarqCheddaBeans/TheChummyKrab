@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import com.pluralsight.models.*;
+import com.pluralsight.ui.GUI;
 import com.pluralsight.ui.UserInterface;
 
 //Where the magic happens
@@ -8,11 +9,8 @@ public class TheChummyKrab {
 
     public static void main(String[] args) {
 
-        //Instantiate UI
-        UserInterface ui = new UserInterface();
-        //Call display method
-        ui.display();
-        //ui.sigMenu();
+        GUI gooey = new GUI();
 
+        gooey.getGUI();
     }
 }

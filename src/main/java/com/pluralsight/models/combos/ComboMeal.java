@@ -1,9 +1,10 @@
-package com.pluralsight.models;
-import java.util.ArrayList;
+package com.pluralsight.models.combos;
+import com.pluralsight.models.*;
+
 import java.util.List;
 
 //class to represent our combo meal object, will deal with menu items
-public class ComboMeal extends MenuItem{
+public class ComboMeal extends MenuItem {
 
     //combo consists of burger, drink and side
     private KrabbyChumPatty burger;
@@ -43,8 +44,8 @@ public class ComboMeal extends MenuItem{
     //Used to display info to user when choosing meal
     @Override
     public String toString() {
-        String summary = "\n" + getName() + "\n";
-        summary += "-Burger: \n" + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
+        String summary = "\n**" + getName() + "**\n";
+        summary += "-Burger: \n    " + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
 
@@ -96,8 +97,8 @@ public class ComboMeal extends MenuItem{
 
     //String for us to display Combo info to order
     public String comboInfo(){
-        String summary = getName() + "\n";
-        summary += "-Burger: " + "\n" + burger.getName() + " (" + burger.getSize() + ") $" + burger.getPrice();
+        String summary = getName() + String.format(" %.2f$",calculatePrice());
+        summary += "\n -Burger: " + "\n    " + burger.getName() + "\n    •" + " (" + burger.getSize() + ") $" + burger.getPrice();
         summary += "\n    • " + burger.getBun() + "  +$" + String.format("%.2f", burger.getBun().getPrice()) + "\n";
         summary += "    • " + burger.getPatty() + "  +$" + String.format("%.2f", burger.getPatty().getPrice()) + "\n";
 

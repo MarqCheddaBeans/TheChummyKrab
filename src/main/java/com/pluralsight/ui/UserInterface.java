@@ -1,6 +1,8 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
+import com.pluralsight.models.combos.ComboMeal;
+import com.pluralsight.models.combos.SignatureComboMeal;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +10,6 @@ import java.util.Scanner;
 import static com.pluralsight.models.Menu.*;
 import static com.pluralsight.models.Size.*;
 import static com.pluralsight.ui.Helper.*;
-import static com.pluralsight.ui.Prompts.*;
 import static com.pluralsight.util.ReceiptWriter.createReceipt;
 
 //Handles User interactions
@@ -120,7 +121,8 @@ public class UserInterface {
        switch(input){
            case 1 -> {
                SignatureComboMeal prettyPatty = promptPrettyPatty();
-               if(!prettyPatty.equals(null)){
+               if(prettyPatty != null){
+                   System.out.println("Meal Added!");
                    order.addItem(prettyPatty);
                }
                orderMenu();
@@ -128,7 +130,8 @@ public class UserInterface {
            }
            case 2 ->{
                SignatureComboMeal nastyPatty = promptNastyPatty();
-               if(!nastyPatty.equals(null)){
+               if(nastyPatty != null){
+                   System.out.println("Meal Added!");
                    order.addItem(nastyPatty);
                }
                orderMenu();
@@ -186,11 +189,9 @@ public class UserInterface {
        List<KrabbyChumPatty> burgers = getDaBurgers();
 
        //Header
-       System.out.println("\n=========================\n");
+       System.out.println("\n=========================");
        System.out.println("\tBuild Your 'Burger'");
-       System.out.println("\n=========================\n");
-
-
+       System.out.println("=========================");
 
        //Prompt for size then display
 
@@ -242,7 +243,7 @@ public class UserInterface {
        ComboMeal combo = null;
 
        while(true){
-           System.out.println("\nWould you like to make " + burger.getName() + " a combo?(Y/N)");
+           System.out.println("\nWould you like to make " + burger.getName() + " a combo?(y/n)");
            String comInput = getValidStrInput();
 
            if(comInput.equalsIgnoreCase("y")){
@@ -285,7 +286,11 @@ public class UserInterface {
        switch(confirmChoice){
 
            case 1 -> {
-               order.addItem(combo);
+               if(combo!= null){
+                   order.addItem(combo);
+               } else{
+                   order.addItem(burger);
+               }
                System.out.println("Order confirmed! Back to main menu");
                orderMenu();
            }
@@ -311,15 +316,41 @@ public class UserInterface {
     List<Drink> drinks = getDaDrinks();
 
        //Header
-       System.out.println("\n=========================\n");
+       System.out.println("\n=========================");
        System.out.println("\tAdd Drink");
-       System.out.println("\n=========================\n");
+       System.out.println("=========================");
+
+
+       System.out.println("\nChoose Size: ");
+
+       for (Size size : Size.values()){
+           System.out.println((size.ordinal() + 1) + ") " + size.name() + " $" + size.getBase());
+       }
+       //prompt user for size
+       int sizeChoice;
+
+       while(true){
+           sizeChoice = getValidNumInput();
+           if (sizeChoice >= 1 && sizeChoice <= values().length){
+               break;
+           }
+           System.out.println("No. Try again\n");
+       }
+
+       //modern switch expression to return size in Size size based on user input, semicolon at the end??
+       Size size = switch (sizeChoice){
+           case 1 -> SMALL;
+           case 2 -> MEDIUM;
+           case 3 -> LARGE;
+           default -> MEDIUM;
+       };
+
        //Prompt use to choose drink
-       System.out.println("Choose a drink: \n");
+       System.out.println("\nChoose a drink: ");
 
        //Cycle through our list of drinks and display to user
        for(int i = 0; i < drinks.size(); i++){
-           System.out.println((i + 1) + ") " + drinks.get(i).getName());
+           System.out.println((i + 1) + ") " + drinks.get(i).getName() );
        }
 
        int choice;
@@ -333,26 +364,6 @@ public class UserInterface {
        }
        //subtract user choice by 1 for drinks index
        Drink drink = drinks.get(choice - 1);
-
-       //prompt user for size
-       System.out.println("\nChoose Size: 1) Small 2) Medium 3) Large");
-       int sizeChoice;
-
-       while(true){
-           sizeChoice = getValidNumInput();
-           if (sizeChoice >= 1 && sizeChoice <= 3){
-               break;
-           }
-           System.out.println("No. Try again\n");
-       }
-
-       //modern switch expression to return size in Size size based on user input, semicolon at the end??
-       Size size = switch (sizeChoice){
-           case 1 -> SMALL;
-           case 2 -> MEDIUM;
-           case 3 -> LARGE;
-           default -> MEDIUM;
-       };
 
        //sets size to users choice and add drink to our order
        drink.setSize(size);
@@ -368,9 +379,34 @@ public class UserInterface {
        List<Side> sides = getDaSides();
 
        //Header
-       System.out.println("\n=========================\n");
+       System.out.println("\n=========================");
        System.out.println("\tAdd a side");
-       System.out.println("\n=========================\n");
+       System.out.println("=========================");
+
+       //prompt user for size
+       System.out.println("\nChoose Size: ");
+
+       for(Size size: Size.values()){
+           System.out.println((size.ordinal())+ 1 + ") " + size.name() + " $" + size.getBase());
+       }
+
+       int sizeChoice;
+
+       while(true){
+           sizeChoice = getValidNumInput();
+           if (sizeChoice >= 1 && sizeChoice <= 3){
+               break;
+           }
+           System.out.println("No. Try again");
+       }
+
+       //modern switch expression to return size in Size size based on user input, semicolon at the end??
+       Size size = switch (sizeChoice){
+           case 1 -> SMALL;
+           case 2 -> MEDIUM;
+           case 3 -> LARGE;
+           default -> MEDIUM;
+       };
 
        //Prompt use to choose side
        System.out.println("Choose a side: ");
@@ -392,27 +428,6 @@ public class UserInterface {
 
        //subtract user choice by 1 for sides index
        Side side = sides.get(choice - 1);
-
-       //prompt user for size
-       System.out.println("\nChoose Size: 1) Small 2) Medium 3) Large");
-
-       int sizeChoice;
-
-       while(true){
-           sizeChoice = getValidNumInput();
-           if (sizeChoice >= 1 && sizeChoice <= 3){
-               break;
-           }
-           System.out.println("No. Try again");
-       }
-
-       //modern switch expression to return size in Size size based on user input, semicolon at the end??
-       Size size = switch (sizeChoice){
-           case 1 -> SMALL;
-           case 2 -> MEDIUM;
-           case 3 -> LARGE;
-           default -> MEDIUM;
-       };
 
        //sets size to users choice and add side to our order
        side.setSize(size);
@@ -478,15 +493,9 @@ public class UserInterface {
 
        //cycle through items
        for(int i = 0; i < items.size(); i++){
-
-           //signature combos cannot be edited
-           if(items.get(i) instanceof SignatureComboMeal){
-               continue;
-           }
-           //everything else will be displayed to user
            System.out.printf("%d) %s - $%.2f%n", (i+1), items.get(i).getName(), items.get(i).calculatePrice());
        }
-       System.out.println("\n0) Cancel");
+       System.out.println("0) Cancel");
 
        int input;
        while(true){
@@ -524,6 +533,10 @@ public class UserInterface {
            System.out.println("You didnt like the combo?");
            order.removeItem(selected);
            promptBurger();
+       }else if(selected instanceof SignatureComboMeal s){
+        System.out.println("Signature combo meals cannot be edited, hit enter to return to return to checkout");
+        scan.nextLine();
+        checkout();
        }else{
            System.out.println("Not sure what youre looking for. Returning to checkout.");
            checkout();
@@ -571,7 +584,7 @@ public class UserInterface {
            order.removeItem(selected);
            checkout();
        } else if( selected instanceof Drink d){
-           System.out.println("Lets remove out your " + d.getName());
+           System.out.println("Lets remove your " + d.getName());
            order.removeItem(selected);
            checkout();
        } else if(selected instanceof Side s){
@@ -579,7 +592,11 @@ public class UserInterface {
            order.removeItem(selected);
            checkout();
        } else if(selected instanceof SignatureComboMeal s){
-           System.out.println("No way!" + s.getName());
+           System.out.println("Successfully removed " + s.getName());
+           order.removeItem(selected);
+           checkout();
+       }else if(selected instanceof ComboMeal s){
+           System.out.println("Successfully removed " + s.getName());
            order.removeItem(selected);
            checkout();
        }else{

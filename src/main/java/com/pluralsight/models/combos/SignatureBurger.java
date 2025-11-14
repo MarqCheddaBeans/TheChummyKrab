@@ -1,9 +1,11 @@
-package com.pluralsight.models;
+package com.pluralsight.models.combos;
+
+import com.pluralsight.models.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignatureBurger extends MenuItem{
+public class SignatureBurger extends MenuItem {
 
     private SignatureBun bun;
     private SignaturePatty patty;

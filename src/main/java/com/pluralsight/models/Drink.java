@@ -7,8 +7,8 @@ public class Drink extends MenuItem{
     private Size size;
 
     //Constructor with super
-    public Drink(String name, double price, Size size) {
-        super(name, price);
+    public Drink(String name, Size size) {
+        super(name, size.getBase());
         this.size = size;
     }
     //overload constructor for special drinks
@@ -28,7 +28,7 @@ public class Drink extends MenuItem{
 
     @Override
     public double calculatePrice() {
-        return .50 + size.getBase();
+        return size.getBase();
     }
 
     public Size getSize() {

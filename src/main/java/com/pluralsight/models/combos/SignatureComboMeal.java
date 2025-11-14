@@ -1,7 +1,9 @@
-package com.pluralsight.models;
+package com.pluralsight.models.combos;
+
+import com.pluralsight.models.MenuItem;
 
 //this class will represent our signature burger
-public class SignatureComboMeal extends MenuItem{
+public class SignatureComboMeal extends MenuItem {
 
     private SignatureBurger burger;
     private SignatureDrink drink;

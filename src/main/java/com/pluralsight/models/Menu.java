@@ -1,15 +1,22 @@
 package com.pluralsight.models;
 
+import com.pluralsight.models.combos.SignatureBurger;
+import com.pluralsight.models.combos.SignatureComboMeal;
+import com.pluralsight.models.combos.SignatureDrink;
+import com.pluralsight.models.combos.SignatureSide;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pluralsight.models.SignatureBurger.SignatureAddOn.*;
-import static com.pluralsight.models.SignatureBurger.SignatureBun.*;
-import static com.pluralsight.models.SignatureBurger.SignaturePatty.*;
+import static com.pluralsight.models.combos.SignatureBurger.SignatureAddOn.*;
+import static com.pluralsight.models.combos.SignatureBurger.SignatureBun.*;
+import static com.pluralsight.models.combos.SignatureBurger.SignaturePatty.*;
 import static com.pluralsight.models.Size.*;
 
+//This is our Menu
 public class Menu {
 
+    //AddOns available for user
     public static List<AddOn> getDaAddons(){
 
         List<AddOn> addOns = new ArrayList<>();
@@ -17,39 +24,41 @@ public class Menu {
         addOns.add(new AddOn("Krunchy Kelp",.25,false));
         addOns.add(new AddOn("Half a Chumion",.25,false));
         addOns.add(new AddOn("Peppers",.25,false));
+        addOns.add(new AddOn("Ketchup",.25,false));
+        addOns.add(new AddOn("Mayo",.25,false));
         addOns.add(new AddOn("Super Secret Sauce",1.50,true));
         addOns.add(new AddOn("Jellyfish Jelly",1.00,true));
         addOns.add(new AddOn("Sea Pickle Chip",.25,false));
         addOns.add(new AddOn("Cheese",1.00,true));
         addOns.add(new AddOn("Extra Patty",2.00,true));
 
-
         return addOns;
     }
 
+    //Drinks available for user
     public static List<Drink> getDaDrinks(){
 
         List<Drink> drinks = new ArrayList<>();
 
-        drinks.add(new Drink("Diet DrKelp", 2.00, MEDIUM));
-        drinks.add(new Drink("Kelp Juice", 3.00, MEDIUM));
-        drinks.add(new Drink("Juggernog", 5.00, MEDIUM));
-        drinks.add(new Drink("Kelp Shake", 4.00, MEDIUM));
-        drinks.add(new Drink("Sea Water",1.00, MEDIUM));
-        drinks.add(new Drink("Speed Cola", 5.00, MEDIUM));
-
+        drinks.add(new Drink("Diet DrKelp", MEDIUM));
+        drinks.add(new Drink("Kelp Juice", MEDIUM));
+        drinks.add(new Drink("Juggernog", MEDIUM));
+        drinks.add(new Drink("Kelp Shake", MEDIUM));
+        drinks.add(new Drink("Sea Water", MEDIUM));
+        drinks.add(new Drink("Speed Cola", MEDIUM));
 
         return drinks;
     }
 
+    //Sides available for user
     public static List<Side> getDaSides(){
 
         List<Side> sides = new ArrayList<>();
-        sides.add(new Side("Crispity Crunchities", 3.49, MEDIUM));
-        sides.add(new Side("Chum Stick", 2.99, MEDIUM));
-        sides.add(new Side("Kelp Fries", 2.49, MEDIUM));
-        sides.add(new Side("Chum Fries", 2.49, MEDIUM));
-        sides.add(new Side("Coral nuggets", 5.00, MEDIUM));
+        sides.add(new Side("Crispity Crunchities", MEDIUM));
+        sides.add(new Side("Chum Stick", MEDIUM));
+        sides.add(new Side("Kelp Fries", MEDIUM));
+        sides.add(new Side("Chum Fries", MEDIUM));
+        sides.add(new Side("Coral nuggets", MEDIUM));
         return sides;
     }
 
@@ -57,7 +66,7 @@ public class Menu {
 
         List<KrabbyChumPatty> burger = new ArrayList<>();
         burger.add(new KrabbyChumPatty(2.00,SMALL));
-        burger.add(new KrabbyChumPatty(3.50,MEDIUM));
+        burger.add(new KrabbyChumPatty(3.75,MEDIUM));
         burger.add(new KrabbyChumPatty(4.25,LARGE));
 
         return burger;

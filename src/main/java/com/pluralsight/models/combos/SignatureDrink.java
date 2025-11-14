@@ -1,8 +1,10 @@
-package com.pluralsight.models;
+package com.pluralsight.models.combos;
 
-public class SignatureSide extends MenuItem{
+import com.pluralsight.models.MenuItem;
 
-    public SignatureSide(String name){
+public class SignatureDrink extends MenuItem {
+
+    public SignatureDrink(String name){
         super(name);
     }
 
@@ -13,8 +15,9 @@ public class SignatureSide extends MenuItem{
 
     @Override
     public String toString(){
-        String info = "Side: \n";
+        String info = "Drink: \n";
         info += "    " + getName() + "\n" ;
+
         return info;
     }
 }

@@ -19,9 +19,9 @@ This application highlights **OOP design**, **enums**, and **data persistence** 
 Inspired by the underwater rivalry between the **Krusty Krab** and the **Chum Bucket**, the restaurant is a mashup called **The Chummy Krab** — serving Krabby-style burgers with Plankton’s “special” touch.
 
 Customers can build their perfect burger by choosing:
-- **Size** Chummy Patty jr.(Small),Chummy Patty(Medium),King Neptunes Chummy Patty(Large)
+- **Size** Chummy Patty jr.(Small), Chummy Patty(Medium), King Neptunes Chummy Patty(Large)
 - **Bun Type** (Potato, Kelp, None)
-- **Patty Type** (Krabby Patty, Chum Patty, Veggie Patty)
+- **Patty Type** (Krabby Patty, Chum Patty, Kelp Patty, No Patty)
 - **Regular & Premium Toppings**
 - **Special Option** (Make it a meal)
 
@@ -37,7 +37,7 @@ Customers can build their perfect burger by choosing:
 - `1) Add Item` – Build and customize a burger
 - `2) Add Drink` – Choose drink size and flavor
 - `3) Add Side` – Add fries, chum sticks, or other sides and size
-- `4) Signature Meal` – Choose from options of signature meals
+- `4) Signature Menu` – Choose from options of signature meals
 - `5) Checkout` – Review and confirm the order
 - `0) Cancel Order` – Cancel the order and return home
 
@@ -54,7 +54,7 @@ Customers can build their perfect burger by choosing:
 ### 🍟 Add Side
 - Choose from available sides
 
-### 🍔 Signature Meal
+### 🍔 Signature Menu
 - Choose between the preset **Pretty Patty Signature Meal** or **Nasty Patty Signature Meal**
 
 ### 💵 Checkout

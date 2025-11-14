@@ -52,7 +52,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
     @Override
     public double calculatePrice(){
 
-        double total =size.getBase()+ patty.getPrice() + bun.getPrice();
+        double total = size.getBase() + patty.getPrice() + bun.getPrice();
 
         if( !addOns.isEmpty()){
             total += addOns.stream()
@@ -66,6 +66,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
        return total;
     }
 
+    //formatted to look nice when displayed to user before adding to order
     @Override
     public String toString(){
 
@@ -86,6 +87,30 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
                 info += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
             }
         }
+        if(isToasted()){
+            info += "    • Toasted Bun +$50\n";
+        } else{
+            info += "    • Cold Bun\n";
+        }
+        return info;
+    }
+
+    //formatted to look nice when placed in order
+    public String burgerInfo(){
+
+       String info = getName() +(": $") + calculatePrice() + "\n    • " + size + "  +$" + String.format("%.2f", size.getBase());
+        info += "\n    • " + bun.displayName + "  +$" + String.format("%.2f", bun.getPrice());
+        info += "\n    • " + patty.getDisplayName() + "  +$" + String.format("%.2f", patty.getPrice()) + "\n";
+
+        if (addOns.isEmpty()|| addOns.equals(null)){
+            info += "    • No addons\n";
+        }else {
+            for( AddOn a : addOns){
+                info += "    • " + a.getName();
+                if(a.isPremium()) info += " [Premium]";
+                info += "  +$" + String.format("%.2f", a.getPrice()) + "\n";
+            }
+        }
 
         if(isToasted()){
             info += "    • Toasted Bun +$50\n";
@@ -94,6 +119,7 @@ public class KrabbyChumPatty extends MenuItem implements Modify {
         }
 
         return info;
+
     }
 
     //GetterSetter

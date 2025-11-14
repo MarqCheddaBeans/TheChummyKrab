@@ -7,10 +7,11 @@ public class Side extends MenuItem{
     private Size size;
 
     //The super constructor
-    public Side(String name, double price, Size size) {
-        super(name, price);
+    public Side(String name, Size size) {
+        super(name,size.getBase());
         this.size = size;
     }
+
 
     public Side(String name){
         super(name);
@@ -19,7 +20,7 @@ public class Side extends MenuItem{
     //Overload the parents methods
     @Override
     public double calculatePrice() {
-        return .75 + size.getBase();
+        return size.getBase();
     }
 
     //ToString to store Side info for later
